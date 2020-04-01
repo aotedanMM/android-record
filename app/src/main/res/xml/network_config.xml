@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>
+<!--限制了非加密的流量请求导致出现 not permitted by network security policy-->
+<!-- https://blog.csdn.net/w180600/article/details/85230778-->

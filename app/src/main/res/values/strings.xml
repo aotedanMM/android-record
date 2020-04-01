@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">aotedan</string>
+    <string name="get_btn">get请求</string>
+    <string name="get_view">get请求获取到的内容</string>
+    <string name="post_btn">post请求</string>
+    <string name="post_view">post请求获取到的内容</string>
+    <string name="send_text_btn">发送</string>
+    <string name="send_text">请输入要发送的文字</string>
+    <string name="record_btn">录音</string>
+</resources>
