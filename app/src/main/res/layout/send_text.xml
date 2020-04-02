@@ -1,25 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    <androidx.percentlayout.widget.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    >
 
-    <EditText
+    <com.beardedhen.androidbootstrap.BootstrapEditText
+        app:layout_widthPercent="70%"
+        app:layout_marginLeftPercent="3%"
+        app:layout_marginTopPercent="13%"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:id="@+id/send_text"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/send_text" />
-
-    <Button
+        android:hint="@string/send_text"
+        android:layout_width="wrap_content"
+        app:bootstrapSize="lg"
+        app:bootstrapBrand="info"
+        android:layout_height="50dp" />
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        app:layout_marginRightPercent="3%"
+        app:layout_marginTopPercent="13%"
+        app:layout_widthPercent="20%"
+        android:layout_alignParentRight="true"
         android:id="@+id/send_text_btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/send_text_btn"
+        app:bootstrapBrand="success"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:showOutline="false"
+        app:roundedCorners="true"
+        android:layout_height="50dp" />
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/record_btn"
+        app:layout_widthPercent="20%"
+        app:layout_marginTopPercent="25%"
+        app:layout_marginLeftPercent="3%"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="@string/record_btn"
+        app:bootstrapBrand="primary"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:showOutline="false"
+        app:roundedCorners="true"
         />
-
-    <Button
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        app:layout_widthPercent="20%"
+        app:layout_marginTopPercent="25%"
+        app:layout_marginLeftPercent="30%"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/play_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="@string/play_btn"
+        app:bootstrapBrand="danger"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:showOutline="false"
+        app:roundedCorners="true"
+        />
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        app:layout_widthPercent="25%"
+        app:layout_marginTopPercent="25%"
+        app:layout_marginLeftPercent="60%"
+        android:layout_alignParentLeft="true"
         android:id="@+id/get_btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/get_btn" />
-</LinearLayout>
+        android:layout_height="50dp"
+        android:text="@string/get_btn"
+        app:bootstrapBrand="success"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:showOutline="false"
+        app:roundedCorners="true"
+        />
+
+</androidx.percentlayout.widget.PercentRelativeLayout>

@@ -1,16 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.percentlayout.widget.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-<Button
-    android:id="@+id/record_btn"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/record_btn"/>
-    <Button
+    >
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/record_btn"
+        app:layout_widthPercent="20%"
+        app:layout_marginTopPercent="15%"
+        app:layout_marginLeftPercent="3%"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="@string/record_btn"
+        app:bootstrapBrand="primary"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:showOutline="false"
+        app:roundedCorners="true"
+        />
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        app:layout_widthPercent="20%"
+        app:layout_marginTopPercent="15%"
+        app:layout_marginLeftPercent="30%"
+        android:layout_alignParentLeft="true"
         android:id="@+id/play_btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="播放录音"/>
-</LinearLayout>
+        android:layout_height="50dp"
+        android:text="@string/play_btn"
+        app:bootstrapBrand="danger"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:showOutline="false"
+        app:roundedCorners="true"
+        />
+    </androidx.percentlayout.widget.PercentRelativeLayout>
