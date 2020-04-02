@@ -1,45 +1,49 @@
 package com.example.aotedan;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-import org.json.JSONObject;
+import com.beardedhen.androidbootstrap.BootstrapButton;
+import com.beardedhen.androidbootstrap.BootstrapEditText;
 
+import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    public Button send_text_btn;
-    public EditText send_text;
-    public Editable inputVal;
-    public String http_url;
-    public Button get_btn;
-    private Button record_btn;
-    private boolean isStart = false;
-    private MediaRecorder mr = null;
-    private Button play_btn;
-    private EditText editname;
-    private EditText editdetail;
-    private Button btnsave;
-    private Button btnclean;
-    private Button btnread;
-    private Context mContext;
+public class MainActivity extends Activity {
+    public Editable inputVal; //输入框的值
+    public TextView tv_title;
+    public BootstrapEditText send_text; //发送输入框
+    public BootstrapButton send_text_btn;// 发送按钮
+    public BootstrapButton get_btn;// get请求
+    public String http_url; // http_url
+    private BootstrapButton play_btn; //播放按钮
+    private BootstrapButton record_btn; // 录音按钮
+    private boolean isStart = false; //开始录音标志
+    private MediaRecorder mr = null; //mediaRecorder对象
+    private Context mContext; //上下文
     //语音文件保存路径
     private String fileUrl = null;
 
@@ -47,13 +51,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tv_title = (TextView)findViewById(R.id.tv_title);
+        tv_title.setGravity(Gravity.CENTER);
         mContext = getApplicationContext();
-        bindViews();
-        play_btn = (Button) findViewById(R.id.play_btn);
-        send_text_btn = (Button) findViewById(R.id.send_text_btn);
-        get_btn = (Button) findViewById(R.id.get_btn);
-        send_text = (EditText) findViewById(R.id.send_text);
-        record_btn = (Button) findViewById(R.id.record_btn);
+        play_btn = (BootstrapButton) findViewById(R.id.play_btn);
+        send_text_btn = (BootstrapButton) findViewById(R.id.send_text_btn);
+        get_btn = (BootstrapButton) findViewById(R.id.get_btn);
+        send_text = (BootstrapEditText) findViewById(R.id.send_text);
+        record_btn = (BootstrapButton) findViewById(R.id.record_btn);
         send_text.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -72,11 +77,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         send_text_btn.setOnClickListener(new SendTextBtnListener()); //发送按钮
-        get_btn.setOnClickListener(new GetBtnListener()); // 测试提示信息按钮
+        get_btn.setOnClickListener(new GetBtnListener()); // get请求按钮
         record_btn.setOnClickListener(new RecordBtnListener());// 录音按钮
         play_btn.setOnClickListener(new PlayRecordListener()); //播放按钮
     }
-
     //发送按钮
     class SendTextBtnListener implements View.OnClickListener{
         @Override
@@ -100,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
-    // 测试提示信息按钮
+    // get请求按钮
     class GetBtnListener implements View.OnClickListener{
         @Override
         public void onClick(View v) {
@@ -113,11 +117,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onClick(View v) {
             if(!isStart){
                 startRecord();
-                record_btn.setText("停止录制");
+                record_btn.setText("停止");
                 isStart = true;
             }else{
                 stopRecord();
-                record_btn.setText("开始录制");
+                record_btn.setText("录音");
                 isStart = false;
             }
         }
@@ -143,9 +147,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     JSONObject jsonObject = new JSONObject(responseData);
                     String msg = jsonObject.getString("msg");
                     int code = jsonObject.optInt("code");
-                    if(code == 200) {
-                        Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
-                    }
+                     Looper.prepare();
+                    Toast.makeText(getApplicationContext(), "成功", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -167,16 +171,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     String responseData = response.body().string();//得到具体数据
                     Log.i("resp",responseData);
                     JSONObject jsonObject = new JSONObject(responseData);
-                    String msg = jsonObject.getString("msg");
                     String resp_data = jsonObject.getString("data");
+                    String msg = jsonObject.getString("msg");
+                    int code = jsonObject.optInt("code");
                     Log.i("data",resp_data);
-                    Log.i("msg",msg);
+                    if(code == 200) {
+                        Looper.prepare();
+                        Toast.makeText(getApplicationContext(), String.valueOf(msg), Toast.LENGTH_SHORT).show();
+                        Looper.loop();
+                    } else {
+                        Looper.prepare();
+                        Toast.makeText(getApplicationContext(), String.valueOf(msg), Toast.LENGTH_SHORT).show();
+                        Looper.loop();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
     }
+    // get请求
+//    private void getSendText(){
+//        new Thread(new Runnable() {//在这个方法中同样还是先开启了一个子线程
+//            @Override
+//            public void run() {
+//                try {
+//                    http_url = "http://192.168.1.50:8781/wx/receiveText";
+//                    OkHttpClient client = new OkHttpClient();
+//                    Request request = new Request.Builder()
+//                            .url(http_url)
+//                            .build();  //然后在子线程里使用OkHttp发出一条HTTP请求，请求的目标地址还是百度的首页的一样。
+//                    Response response = client.newCall(request).execute();//接收服务器返回的数据
+//                    String responseData = response.body().string();//得到具体数据
+//                    Log.i("resp",responseData);
+//                    JSONObject jsonObject = new JSONObject(responseData);
+//                    String msg = jsonObject.getString("msg");
+//                    String resp_data = jsonObject.getString("data");
+//                    Log.i("data",resp_data);
+//                    Log.i("msg",msg);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
+//    }
     //开始录制
     private void startRecord(){
         if(mr == null){
@@ -211,60 +249,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-
     //停止录制，资源释放
     private void stopRecord(){
         if(mr != null){
             mr.stop();
             mr.release();
             mr = null;
-        }
-    }
-
-    private void bindViews() {
-        editname = (EditText) findViewById(R.id.edittitle);
-        editdetail = (EditText) findViewById(R.id.editdetail);
-        btnsave = (Button) findViewById(R.id.btnsave);
-        btnclean = (Button) findViewById(R.id.btnclean);
-        btnread = (Button) findViewById(R.id.btnread);
-
-        btnsave.setOnClickListener(this);
-        btnclean.setOnClickListener(this);
-        btnread.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btnclean:
-                editdetail.setText("");
-                editname.setText("");
-                break;
-            case R.id.btnsave:
-                String filename = editname.getText().toString();
-                String filedetail = editdetail.getText().toString();
-                SDFileHelper sdHelper = new SDFileHelper(mContext);
-                try
-                {
-                    sdHelper.savaFileToSD(filename, filedetail);
-                    Toast.makeText(getApplicationContext(), "数据写入成功", Toast.LENGTH_SHORT).show();
-                }
-                catch(Exception e){
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "数据写入失败", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            case R.id.btnread:
-                String detail = "";
-                SDFileHelper sdHelper2 = new SDFileHelper(mContext);
-                try
-                {
-                    String filename2 = editname.getText().toString();
-                    detail = sdHelper2.readFromSD(filename2);
-                }
-                catch(IOException e){e.printStackTrace();}
-                Toast.makeText(getApplicationContext(), detail, Toast.LENGTH_SHORT).show();
-                break;
         }
     }
 }
