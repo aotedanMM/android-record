@@ -147,9 +147,11 @@ public class MainActivity extends Activity {
                     JSONObject jsonObject = new JSONObject(responseData);
                     String msg = jsonObject.getString("msg");
                     int code = jsonObject.optInt("code");
-                     Looper.prepare();
-                    Toast.makeText(getApplicationContext(), "成功", Toast.LENGTH_SHORT).show();
-                    Looper.loop();
+                    if(code == 200) {
+                        Looper.prepare();
+                        Toast.makeText(getApplicationContext(),"成功", Toast.LENGTH_SHORT).show();
+                        Looper.loop();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -177,11 +179,11 @@ public class MainActivity extends Activity {
                     Log.i("data",resp_data);
                     if(code == 200) {
                         Looper.prepare();
-                        Toast.makeText(getApplicationContext(), String.valueOf(msg), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
                         Looper.loop();
                     } else {
                         Looper.prepare();
-                        Toast.makeText(getApplicationContext(), String.valueOf(msg), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
                         Looper.loop();
                     }
                 } catch (Exception e) {
@@ -190,31 +192,6 @@ public class MainActivity extends Activity {
             }
         }).start();
     }
-    // get请求
-//    private void getSendText(){
-//        new Thread(new Runnable() {//在这个方法中同样还是先开启了一个子线程
-//            @Override
-//            public void run() {
-//                try {
-//                    http_url = "http://192.168.1.50:8781/wx/receiveText";
-//                    OkHttpClient client = new OkHttpClient();
-//                    Request request = new Request.Builder()
-//                            .url(http_url)
-//                            .build();  //然后在子线程里使用OkHttp发出一条HTTP请求，请求的目标地址还是百度的首页的一样。
-//                    Response response = client.newCall(request).execute();//接收服务器返回的数据
-//                    String responseData = response.body().string();//得到具体数据
-//                    Log.i("resp",responseData);
-//                    JSONObject jsonObject = new JSONObject(responseData);
-//                    String msg = jsonObject.getString("msg");
-//                    String resp_data = jsonObject.getString("data");
-//                    Log.i("data",resp_data);
-//                    Log.i("msg",msg);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }).start();
-//    }
     //开始录制
     private void startRecord(){
         if(mr == null){
@@ -223,7 +200,6 @@ public class MainActivity extends Activity {
             if(!dir.exists()){
                 dir.mkdirs();
             }
-
             File soundFile = new File(dir,System.currentTimeMillis()+".amr");
             fileUrl = String.valueOf(soundFile);
             Log.i("soundFile",String.valueOf(soundFile));
