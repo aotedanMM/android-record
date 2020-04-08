@@ -2,5 +2,8 @@
 <resources>
     <color name="colorPrimary">#409EFF</color>
     <color name="colorPrimaryDark">#409EFF</color>
-    <color name="colorAccent">#dddddd</color>
+    <color name="colorAccent">#d3d7d9</color>
+    <!--次要文字-->
+    <color name="colorMinor">#999999</color>
+    <color name="borderLine">#d3d7d9</color>
 </resources>

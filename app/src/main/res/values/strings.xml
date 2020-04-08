@@ -8,4 +8,21 @@
     <string name="send_text">请输入要发送的文字</string>
     <string name="record_btn">录音</string>
     <string name="play_btn">播放</string>
+    <!-- 登录-->
+    <string name="user_account">请输入账号</string>
+    <string name="user_psd">请输入密码</string>
+    <string name="login_btn">登  录</string>
+    <string name="register">注册</string>
+    <string name="forget">忘记密码？</string>
+    <!-- 注册-->
+    <string name="register_account">请输入手机号</string>
+    <string name="register_psd">请输入密码</string>
+    <string name="register_psd_again">请再次输入密码</string>
+    <string name="register_btn">注  册</string>
+    <!-- 忘记密码-->
+    <string name="forget_account">请输入手机号</string>
+    <string name="forget_code">请输入验证码</string>
+    <string name="get_forget_code">获取验证码</string>
+    <string name="forget_btn">找回密码</string>
+
 </resources>
