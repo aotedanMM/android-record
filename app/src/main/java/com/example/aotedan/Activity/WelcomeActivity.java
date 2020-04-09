@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import com.example.aotedan.IndexActivity;
 import com.example.aotedan.MainActivity;
 import com.example.aotedan.R;
 
@@ -22,7 +23,7 @@ public class WelcomeActivity extends Activity {
         TimerTask delayTask = new TimerTask() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent(WelcomeActivity.this, MainActivity.class);
+                Intent mainIntent = new Intent(WelcomeActivity.this, IndexActivity.class);
                 startActivity(mainIntent);
                 WelcomeActivity.this.finish();
             }

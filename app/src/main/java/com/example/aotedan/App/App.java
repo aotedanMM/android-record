@@ -3,7 +3,6 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.util.Log;
 
-import com.example.aotedan.network.RequestSend;
 import com.example.aotedan.utils.ToastUtils;
 
 import java.util.List;

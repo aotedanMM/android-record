@@ -1,341 +1,348 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-        <!--标题栏-->
-        <include layout="@layout/title_bar"/>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:background="@mipmap/banner"/>
-        <!--井下人数-->
+    tools:context=".ui.home.HomeFragment">
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical">
+    <!--标题栏-->
+<!--    <include layout="@layout/title_bar"/>-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@mipmap/banner"/>
+    <!--井下人数-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="5dp">-->
+        <!--                <ImageView-->
+        <!--                    android:layout_width="20dp"-->
+        <!--                    android:layout_height="20dp"-->
+        <!--                    android:layout_gravity="center_vertical"-->
+        <!--                    android:layout_marginLeft="20dp"-->
+        <!--                    android:layout_marginRight="5dp"-->
+        <!--                    android:background="@mipmap/title1"/>-->
+        <!--                <TextView-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:textSize="18sp"-->
+        <!--                    android:text="井下人数"/>-->
+        <!--            </LinearLayout>-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="5dp">-->
-            <!--                <ImageView-->
-            <!--                    android:layout_width="20dp"-->
-            <!--                    android:layout_height="20dp"-->
-            <!--                    android:layout_gravity="center_vertical"-->
-            <!--                    android:layout_marginLeft="20dp"-->
-            <!--                    android:layout_marginRight="5dp"-->
-            <!--                    android:background="@mipmap/title1"/>-->
-            <!--                <TextView-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:textSize="18sp"-->
-            <!--                    android:text="井下人数"/>-->
-            <!--            </LinearLayout>-->
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp">
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="10dp">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/person_sort1_num"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="1001"
-                        android:textColor="#409EFF"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:id="@+id/person_sort1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/person_sort1"
-                        android:textColor="#333"
-                        android:textSize="12sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/person_sort2_num"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="90"
-                        android:textColor="#409EFF"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:id="@+id/person_sort2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/person_sort2"
-                        android:textColor="#333"
-                        android:textSize="12sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/person_sort3_num"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="50"
-                        android:textColor="#409EFF"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:id="@+id/person_sort3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/person_sort1"
-                        android:textColor="#333"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/person_sort1_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="1001"
+                    android:textColor="#409EFF"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/person_sort1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/person_sort1"
+                    android:textColor="#333"
+                    android:textSize="12sp" />
             </LinearLayout>
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="10dp">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/person_sort4_num"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="0"
-                        android:textColor="#409EFF"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:id="@+id/person_sort4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/person_sort4"
-                        android:textColor="#333"
-                        android:textSize="12sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/person_sort5_num"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="15"
-                        android:textColor="#409EFF"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:id="@+id/person_sort5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/person_sort5"
-                        android:textColor="#333"
-                        android:textSize="12sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/person_sort6_num"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="26"
-                        android:textColor="#409EFF"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:id="@+id/person_sort6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/person_sort6"
-                        android:textColor="#333"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/person_sort2_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="90"
+                    android:textColor="#409EFF"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/person_sort2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/person_sort2"
+                    android:textColor="#333"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/person_sort3_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="50"
+                    android:textColor="#409EFF"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/person_sort3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/person_sort1"
+                    android:textColor="#333"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
-        <!--分隔条-->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="#eee"/>
-        <!--分类-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp">
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="90dp">
-                <LinearLayout
-                    android:id="@+id/sort_btn1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:background="@mipmap/sort1" />
-
-                    <TextView
-                        android:id="@+id/sort_btn1_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/home_sort1"
-                        android:textColor="#333"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/sort_btn2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:background="@mipmap/sort2" />
-
-                    <TextView
-                        android:id="@+id/sort_btn2_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/home_sort2"
-                        android:textColor="#333"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/sort_btn3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:background="@mipmap/sort3" />
-
-                    <TextView
-                        android:id="@+id/sort_btn3_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/home_sort3"
-                        android:textColor="#333"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/person_sort4_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="0"
+                    android:textColor="#409EFF"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/person_sort4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/person_sort4"
+                    android:textColor="#333"
+                    android:textSize="12sp" />
             </LinearLayout>
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="90dp">
-                <LinearLayout
-                    android:id="@+id/sort_btn4"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:background="@mipmap/sort4" />
-                    <TextView
-                        android:id="@+id/sort_btn4_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/home_sort4"
-                        android:textColor="#333"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/sort_btn5"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:background="@mipmap/sort5" />
-
-                    <TextView
-                        android:id="@+id/sort_btn5_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/home_sort5"
-                        android:textColor="#333"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/sort_btn6"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:background="@mipmap/sort6" />
-
-                    <TextView
-                        android:id="@+id/sort_btn6_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/home_sort6"
-                        android:textColor="#333"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/person_sort5_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="15"
+                    android:textColor="#409EFF"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/person_sort5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/person_sort5"
+                    android:textColor="#333"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/person_sort6_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="26"
+                    android:textColor="#409EFF"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/person_sort6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/person_sort6"
+                    android:textColor="#333"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
-        <!--分隔条-->
-        <View
+    </LinearLayout>
+    <!--分隔条-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#eee"/>
+    <!--分类-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="#eee"/>
-</LinearLayout>
+            android:layout_height="90dp">
+            <LinearLayout
+                android:id="@+id/sort_btn1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@mipmap/sort1" />
+
+                <TextView
+                    android:id="@+id/sort_btn1_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/home_sort1"
+                    android:textColor="#333"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sort_btn2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@mipmap/sort2" />
+
+                <TextView
+                    android:id="@+id/sort_btn2_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/home_sort2"
+                    android:textColor="#333"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sort_btn3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@mipmap/sort3" />
+
+                <TextView
+                    android:id="@+id/sort_btn3_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/home_sort3"
+                    android:textColor="#333"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp">
+            <LinearLayout
+                android:id="@+id/sort_btn4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@mipmap/sort4" />
+                <TextView
+                    android:id="@+id/sort_btn4_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/home_sort4"
+                    android:textColor="#333"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sort_btn5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@mipmap/sort5" />
+
+                <TextView
+                    android:id="@+id/sort_btn5_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/home_sort5"
+                    android:textColor="#333"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sort_btn6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@mipmap/sort6" />
+
+                <TextView
+                    android:id="@+id/sort_btn6_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/home_sort6"
+                    android:textColor="#333"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <!--分隔条-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#eee"/>
+   </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

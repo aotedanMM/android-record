@@ -14,8 +14,6 @@ import android.widget.Toast;
 import com.example.aotedan.App.App;
 import com.example.aotedan.MainActivity;
 import com.example.aotedan.R;
-import com.example.aotedan.network.NetworkRequest;
-import com.example.aotedan.network.RequestCallBack;
 import com.example.aotedan.utils.SSLSocketClient;
 
 import org.json.JSONException;

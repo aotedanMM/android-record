@@ -7,4 +7,8 @@
     <!--次要文字-->
     <color name="colorMinor">#999999</color>
     <color name="borderLine">#d3d7d9</color>
+    <color name="colorSuccess">#67C23A</color>
+    <color name="colorDanger">#E6A23C</color>
+    <color name="colorError">#F56C6C</color>
+
 </resources>

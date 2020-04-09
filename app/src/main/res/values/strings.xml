@@ -44,4 +44,7 @@
     <string name="bottom_btn3">气体监测</string>
     <string name="bottom_btn4">个人中心</string>
 
+    <string name="title_activity_index">activity_index</string>
+
+
 </resources>
