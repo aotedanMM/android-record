@@ -4,20 +4,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <!--标题栏-->
-    <include layout="@layout/title_bar"/>
-    <LinearLayout
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <FrameLayout
+        android:id="@+id/frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        >
-        <Button
-            android:id="@+id/index_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape"
-            android:textColor="#fff"
-            android:layout_marginTop="60dp"
-            android:text="登录"/>
-    </LinearLayout>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eeeeee" />
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/bottom_btn1"
+            style="@style/MainBottom"
+            android:drawableTop="@drawable/bottom_check1"
+            android:text="@string/bottom_btn1" />
+        <RadioButton
+            android:id="@+id/bottom_btn2"
+            style="@style/MainBottom"
+            android:drawableTop="@drawable/bottom_check2"
+            android:text="@string/bottom_btn2" />
+        <RadioButton
+            android:id="@+id/bottom_btn3"
+            style="@style/MainBottom"
+            android:drawableTop="@drawable/bottom_check3"
+            android:text="@string/bottom_btn3" />
+        <RadioButton
+            android:id="@+id/bottom_btn4"
+            style="@style/MainBottom"
+            android:drawableTop="@drawable/bottom_check4"
+            android:text="@string/bottom_btn4" />
+    </RadioGroup>
+</LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

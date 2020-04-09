@@ -1,15 +1,26 @@
 package com.example.aotedan;
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.aotedan.Activity.LoginActivity;
 
-public class MainActivity extends Activity implements View.OnClickListener{
-    private Button index_login;
+public class MainActivity extends Activity implements RadioGroup.OnCheckedChangeListener{
+    private RadioGroup radioGroup;
+    private RadioButton radioButton;
+    private Fragment fragments;
+    private TextView title_bar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,24 +28,14 @@ public class MainActivity extends Activity implements View.OnClickListener{
         initView();
     }
     private void initView(){
-        index_login = findViewById(R.id.index_login);
-        setView();
-    }
-    private void setView(){
-        index_login.setOnClickListener(this);
+        radioGroup = findViewById(R.id.radio_group);
+        radioGroup.setOnCheckedChangeListener(this);
+        // 默认选中按钮组的第一项
+        radioGroup.check(R.id.bottom_btn1);
+        radioButton = findViewById(R.id.bottom_btn1);
     }
     @Override
-    public void onClick(View v) {
-        Log.i("onClick","register");
-        switch (v.getId()) {
-            case R.id.index_login:
-                goLogin();
-                break;
-        }
-    }
-    private void goLogin() {
-//        Log.i("login","login");
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+
     }
 }
