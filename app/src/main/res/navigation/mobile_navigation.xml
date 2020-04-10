@@ -12,16 +12,16 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_person"
-        android:name="com.example.aotedan.ui.person.PersonFragment"
-        android:label="@string/bottom_btn2"
-        tools:layout="@layout/fragment_person" />
-
-    <fragment
         android:id="@+id/navigation_gas"
         android:name="com.example.aotedan.ui.gas.GasFragment"
-        android:label="@string/bottom_btn3"
+        android:label="@string/bottom_btn2"
         tools:layout="@layout/fragment_gas" />
+
+    <fragment
+        android:id="@+id/navigation_person"
+        android:name="com.example.aotedan.ui.person.PersonFragment"
+        android:label="@string/bottom_btn3"
+        tools:layout="@layout/fragment_person" />
     <fragment
         android:id="@+id/navigation_center"
         android:name="com.example.aotedan.ui.center.CenterFragment"

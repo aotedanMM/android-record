@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aotedan.App.App;
+import com.example.aotedan.IndexActivity;
 import com.example.aotedan.MainActivity;
 import com.example.aotedan.R;
 import com.example.aotedan.utils.SSLSocketClient;
@@ -19,6 +20,7 @@ import com.example.aotedan.utils.SSLSocketClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyManagementException;
@@ -96,7 +98,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 break;
         }
     }
-
     //    登录
     private void login() {
         name = user_account.getText().toString().trim();
@@ -110,32 +111,41 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             App.toast.ToastMessageShort("请输入密码");
             return;
         }
-        App.toast.ToastMessageLong(name);
-        App.toast.ToastMessageLong(psd);
         new Thread(new Runnable() {//在这个方法中同样还是先开启了一个子线程
             @Override
             public void run() {
                 try {
+                    MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                    JSONObject json = new JSONObject();
+                    // 13536951364 、13243210010
+                    json.put("wxUserAccount","13536951364");
+                    json.put("wxUserPassword",psd);
                     String http_url = "http://192.168.1.50:8080/v1/api/wx/login";
                     OkHttpClient client = new OkHttpClient();
-                    RequestBody requestBody = new FormBody.Builder()
-                            .add("wxUserAccount", "13243210010")
-                            .add("wxUserPassword", "123456aaa")
-                            .build();
+                    RequestBody requestBody = FormBody.create(MediaType.parse("application/json; charset=utf-8"), json.toString());
                     Request request = new Request.Builder()
+                            .header("Authorization","13243210010")
                             .url(http_url)
                             .post(requestBody)
                             .build();
-//                    HTTPSCerUtils.setTrustAllCertificate(request);
                     Response response = client.newCall(request).execute();//接收服务器返回的数据
                     String responseData = response.body().string();//得到具体数据
-                    Log.i("resp", responseData);
-                    JSONObject jsonObject = new JSONObject(responseData);
-                    String msg = jsonObject.getString("msg");
-                    int code = jsonObject.optInt("code");
-                    if (code == 200) {
+                    Log.i("resp",responseData);
+                    JSONObject jsonObject = new JSONObject(responseData); // json转jsonObject
+                    int code = jsonObject.optInt("code");// code
+                    String msg = jsonObject.getString("msg");// msg
+                    if(code == 200) {
+                        JSONObject resp_data = jsonObject.getJSONObject("data"); //resp.data
+                        String userName = resp_data.getString("staffName");// 姓名
+                        int token = resp_data.optInt("staffPhone"); // token
                         Looper.prepare();
-                        Toast.makeText(getApplicationContext(), "成功", Toast.LENGTH_SHORT).show();
+                        App.toast.ToastMessageShort(msg);
+                        Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
+                        startActivity(intent);
+                        Looper.loop();
+                    } else {
+                        Looper.prepare();
+                        App.toast.ToastMessageShort(msg);
                         Looper.loop();
                     }
                 } catch (Exception e) {
@@ -143,8 +153,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 }
             }
         }).start();
-        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-        startActivity(intent);
+
     }
 
     private void register() {

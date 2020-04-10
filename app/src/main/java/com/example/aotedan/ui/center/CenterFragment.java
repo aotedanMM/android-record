@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.aotedan.R;
 import com.example.aotedan.ui.gas.GasViewModel;
 
-public class CenterFragment extends Fragment implements View.OnClickListener{
+public class CenterFragment extends Fragment{
     private GasViewModel gasViewModel;
     public EditText send_text; //输入框
     public Button send_text_btn;// 发送按钮
@@ -31,14 +31,5 @@ public class CenterFragment extends Fragment implements View.OnClickListener{
         gasViewModel = ViewModelProviders.of(this).get(GasViewModel.class);
         View root = inflater.inflate(R.layout.fragment_center, container, false);
         return root;
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 }

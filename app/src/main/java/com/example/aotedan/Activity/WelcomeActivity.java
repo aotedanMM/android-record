@@ -23,7 +23,7 @@ public class WelcomeActivity extends Activity {
         TimerTask delayTask = new TimerTask() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent(WelcomeActivity.this, IndexActivity.class);
+                Intent mainIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
                 startActivity(mainIntent);
                 WelcomeActivity.this.finish();
             }

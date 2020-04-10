@@ -28,37 +28,45 @@
                 android:maxLines="1"
                 android:textColor="#000000"
                 android:hint="@string/forget_account"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/forget_code"
+                android:id="@+id/id_card"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginBottom="15dp"
                 android:layout_gravity="center_vertical"
-                android:layout_alignParentLeft="true"
+                android:background="@drawable/input_border"
+                android:textSize="18sp"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="#000000"
+                android:hint="@string/id_card"/>
+
+            <EditText
+                android:id="@+id/new_psd"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="15dp"
+                android:layout_gravity="center_vertical"
                 android:background="@drawable/input_border"
                 android:textSize="18sp"
                 android:inputType="textWebPassword"
                 android:maxLines="1"
                 android:textColor="#000000"
-                android:hint="@string/forget_code"/>
-                <Button
-                    android:id="@+id/get_forget_code"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_alignParentRight="true"
-                    android:textColor="#fff"
-                    android:background="@drawable/shape"
-                    android:text="@string/get_forget_code"/>
+                android:hint="@string/new_psd"/>
+<!--                <Button-->
+<!--                    android:id="@+id/get_forget_code"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:textColor="#fff"-->
+<!--                    android:background="@drawable/shape"-->
+<!--                    android:text="@string/get_forget_code"/>-->
 
-            </RelativeLayout>
             <Button
                 android:id="@+id/forget_btn"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:textColor="#fff"
                 android:background="@drawable/shape"
                 android:text="@string/forget_btn"

@@ -1,9 +1,8 @@
 package com.example.aotedan;
 
 import android.os.Bundle;
-
+import android.widget.Button;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -11,7 +10,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class IndexActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,5 +25,4 @@ public class IndexActivity extends AppCompatActivity {
         // 动态设置顶部标题栏的文字
         NavigationUI.setupWithNavController(navView, navController);
     }
-
 }

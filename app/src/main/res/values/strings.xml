@@ -24,6 +24,8 @@
     <string name="forget_code">请输入验证码</string>
     <string name="get_forget_code">获取验证码</string>
     <string name="forget_btn">找回密码</string>
+    <string name="id_card">请输入身份证号</string>
+    <string name="new_psd">请输入新密码</string>
     <!-- 首页-->
     <string name="person_sort1">井下总人数</string>
     <string name="person_sort2">超时人数</string>
@@ -40,8 +42,8 @@
     <string name="home_sort6">考勤管理</string>
 
     <string name="bottom_btn1">首页</string>
-    <string name="bottom_btn2">人员监测</string>
-    <string name="bottom_btn3">气体监测</string>
+    <string name="bottom_btn2">气体监测</string>
+    <string name="bottom_btn3">人员监测</string>
     <string name="bottom_btn4">个人中心</string>
 
     <string name="title_activity_index">activity_index</string>

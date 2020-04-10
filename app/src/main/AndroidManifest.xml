@@ -26,9 +26,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-        <activity
-            android:name=".IndexActivity"
-            android:label="@string/title_activity_index"></activity>
+
         <!-- 为解决欢迎页空白情况，添加style -->
         <activity
             android:name=".Activity.WelcomeActivity"
@@ -38,11 +36,19 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- 首页 -->
-        <activity android:name=".MainActivity" /> <!-- 登录 -->
-        <activity android:name=".Activity.LoginActivity" /> <!-- 注册 -->
-        <activity android:name=".Activity.RegisterActivity" /> <!-- 忘记密码 -->
-        <activity android:name=".Activity.ForgetActivity" />
+        </activity>
+        <!-- 首页 -->
+        <activity android:name=".MainActivity" />
+        <!-- 登录 -->
+        <activity android:name=".Activity.LoginActivity" />
+        <!-- 注册 -->
+        <activity android:name=".Activity.RegisterActivity" />
+        <!-- 忘记密码 -->
+        <activity android:name=".Activity.ForgetActivity"/>
+        <!--首页2-->
+        <activity
+            android:name=".IndexActivity"
+            android:label="@string/title_activity_index"/>
     </application>
 
 </manifest>
