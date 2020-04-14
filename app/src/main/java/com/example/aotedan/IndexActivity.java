@@ -24,5 +24,11 @@ public class IndexActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         // 动态设置顶部标题栏的文字
         NavigationUI.setupWithNavController(navView, navController);
+        initView();
     }
+    private void initView(){
+//        init();
+
+    }
+
 }

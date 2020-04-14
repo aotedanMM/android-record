@@ -103,26 +103,26 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         name = user_account.getText().toString().trim();
         psd = user_psd.getText().toString().trim();
         Log.i("name", name);
-        if (name.equals("")) {
-            App.toast.ToastMessageShort("请输入账号");
-            return;
-        }
-        if (psd.equals("")) {
-            App.toast.ToastMessageShort("请输入密码");
-            return;
-        }
+//        if (name.equals("")) {
+//            App.toast.ToastMessageShort("请输入账号");
+//            return;
+//        }
+//        if (psd.equals("")) {
+//            App.toast.ToastMessageShort("请输入密码");
+//            return;
+//        }
         new Thread(new Runnable() {//在这个方法中同样还是先开启了一个子线程
             @Override
             public void run() {
                 try {
-                    MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                    MediaType mediaType  = MediaType.parse("application/json; charset=utf-8");
                     JSONObject json = new JSONObject();
                     // 13536951364 、13243210010
-                    json.put("wxUserAccount","13536951364");
-                    json.put("wxUserPassword",psd);
+                    json.put("wxUserAccount","13243210010");
+                    json.put("wxUserPassword","123456");
                     String http_url = "http://192.168.1.50:8080/v1/api/wx/login";
                     OkHttpClient client = new OkHttpClient();
-                    RequestBody requestBody = FormBody.create(MediaType.parse("application/json; charset=utf-8"), json.toString());
+                    RequestBody requestBody = FormBody.create(mediaType , json.toString());
                     Request request = new Request.Builder()
                             .header("Authorization","13243210010")
                             .url(http_url)

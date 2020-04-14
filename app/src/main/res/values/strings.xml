@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">中科鑫合</string>
+    <!-- 语音-->
     <string name="get_btn">get请求</string>
     <string name="get_view">get请求获取到的内容</string>
     <string name="post_btn">post请求</string>
@@ -8,6 +9,7 @@
     <string name="send_text">请输入要发送的文字</string>
     <string name="record_btn">录音</string>
     <string name="play_btn">播放</string>
+    <string name="send_btn">发送</string>
     <!-- 登录-->
     <string name="user_account">请输入账号</string>
     <string name="user_psd">请输入密码</string>
