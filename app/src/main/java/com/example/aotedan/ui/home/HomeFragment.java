@@ -2,25 +2,19 @@ package com.example.aotedan.ui.home;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
-import com.example.aotedan.App.App;
 import com.example.aotedan.R;
+import com.example.aotedan.bean.DownHoleNumBean;
+import com.google.gson.Gson;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -33,6 +27,7 @@ import okhttp3.Response;
 
 public class HomeFragment<Int> extends Fragment implements View.OnClickListener{
     private Handler handler;
+    private DownHoleNumBean downHoleNum;
     private JSONObject personNumData;
     private String sumStaff;
     private String overTimeStaff;
@@ -93,23 +88,10 @@ public class HomeFragment<Int> extends Fragment implements View.OnClickListener{
             public void onResponse(Call call, Response response) throws IOException {
                 String responseData = response.body().string();//得到具体数据
                 Log.i("resp",responseData);
-                try {
-                    JSONObject jsonObject = new JSONObject(responseData);
-                    int code = jsonObject.optInt("code");// code
-                    String msg = jsonObject.getString("msg");// msg
-                    personNumData = jsonObject.getJSONObject("data");
-                    sumStaff = personNumData.getString("sumStaff");
-                    overTimeStaff = personNumData.getString("overTimeStaff");
-                    seriousTimeStaff = personNumData.getString("seriousTimeStaff");
-                    unAttendanceStaff = personNumData.getString("unAttendanceStaff");
-                    importantStaff = personNumData.getString("importantStaff");
-                    limitStaff = personNumData.getString("limitStaff");
-                    Log.i("personNumData",String.valueOf(personNumData));
-                    if(code == 200) {
-                        handler.post(runnableUi);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                Gson gson = new Gson();
+                downHoleNum = gson.fromJson(responseData, DownHoleNumBean.class);
+                if(downHoleNum.getCode()==200){
+                    handler.post(runnableUi);
                 }
             }
         });
@@ -119,12 +101,12 @@ public class HomeFragment<Int> extends Fragment implements View.OnClickListener{
         @Override
         public void run() {
             //更新界面
-                person_sort1_num.setText(sumStaff);
-                person_sort2_num.setText(overTimeStaff);
-                person_sort3_num.setText(seriousTimeStaff);
-                person_sort4_num.setText(unAttendanceStaff);
-                person_sort5_num.setText(importantStaff);
-                person_sort6_num.setText(limitStaff);
+                person_sort1_num.setText(downHoleNum.getData().getSumStaff());
+                person_sort2_num.setText(downHoleNum.getData().getOverTimeStaff());
+                person_sort3_num.setText(downHoleNum.getData().getSeriousTimeStaff());
+                person_sort4_num.setText(downHoleNum.getData().getUnAttendanceStaff());
+                person_sort5_num.setText(downHoleNum.getData().getImportantStaff());
+                person_sort6_num.setText(downHoleNum.getData().getLimitStaff());
         }
     };
 

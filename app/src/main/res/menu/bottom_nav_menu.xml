@@ -11,10 +11,10 @@
         android:icon="@mipmap/bottom2"
         android:title="@string/bottom_btn2" />
 
-<!--    <item-->
-<!--        android:id="@+id/navigation_person"-->
-<!--        android:icon="@mipmap/bottom3"-->
-<!--        android:title="@string/bottom_btn3" />-->
+    <item
+        android:id="@+id/navigation_person"
+        android:icon="@mipmap/bottom3"
+        android:title="@string/bottom_btn3" />
 
     <item
         android:id="@+id/navigation_center"

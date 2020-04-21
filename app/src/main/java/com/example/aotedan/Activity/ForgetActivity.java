@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.aotedan.App.App;
 import com.example.aotedan.R;
+import com.example.aotedan.bean.BaseRequestDataBean;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -30,6 +32,7 @@ public class ForgetActivity extends Activity implements View.OnClickListener {
     private String account;
     private String id_card;
     private String psd;
+    private BaseRequestDataBean baseRequestDataBean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +83,7 @@ public class ForgetActivity extends Activity implements View.OnClickListener {
                 try {
                     MediaType JSON = MediaType.parse("application/json; charset=utf-8");
                     JSONObject json = new JSONObject();
-                    json.put("account",account);
+                    json.put("account","13243210010");
                     json.put("idCard","136263199102162681");
                     json.put("newPassword",psd);
                     String http_url = "http://192.168.1.50:8080/v1/api/wx/forgetPassword";
@@ -94,18 +97,17 @@ public class ForgetActivity extends Activity implements View.OnClickListener {
                     Response response = client.newCall(request).execute();//接收服务器返回的数据
                     String responseData = response.body().string();//得到具体数据
                     Log.i("resp",responseData);
-                    JSONObject jsonObject = new JSONObject(responseData); // json转jsonObject
-                    int code = jsonObject.optInt("code");// code
-                    String msg = jsonObject.getString("msg");// msg
-                    if(code == 200) {
+                    Gson gson = new Gson();
+                    baseRequestDataBean = gson.fromJson(responseData,BaseRequestDataBean.class);
+                    if(baseRequestDataBean.getCode()==200){
                         Looper.prepare();
-                        App.toast.ToastMessageShort(msg);
-                        Intent intent = new Intent(ForgetActivity.this, LoginActivity.class);
+                        App.toast.ToastMessageShort(baseRequestDataBean.getMsg());
+                        Intent intent = new Intent(ForgetActivity.this,LoginActivity.class);
                         startActivity(intent);
                         Looper.loop();
                     } else {
                         Looper.prepare();
-                        App.toast.ToastMessageShort(msg);
+                        App.toast.ToastMessageShort(baseRequestDataBean.getMsg());
                         Looper.loop();
                     }
                 } catch (Exception e) {

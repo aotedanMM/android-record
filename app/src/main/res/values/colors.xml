@@ -10,5 +10,6 @@
     <color name="colorSuccess">#67C23A</color>
     <color name="colorDanger">#E6A23C</color>
     <color name="colorError">#F56C6C</color>
-
+    <color name="blackColor">#000000</color>
+    <color name="whiteColor">#ffffff</color>
 </resources>

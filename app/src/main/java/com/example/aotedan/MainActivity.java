@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -20,11 +22,14 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
     private RadioButton radioButton;
     private Fragment fragments;
     private TextView title_bar;
-
+    private String data[] = {"aa","bb","cc","dd","aa","bb","cc","dd","aa","bb","cc","dd","aa","bb","cc","dd"};//假数据
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ListView listView = (ListView) findViewById(R.id.listview);//在视图中找到ListView
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,data);//新建并配置ArrayAapeter
+        listView.setAdapter(adapter);
         initView();
     }
     private void initView(){

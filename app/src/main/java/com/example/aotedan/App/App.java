@@ -15,7 +15,7 @@ public class App extends Application {
     @SuppressLint("StaticFieldLeak")
     public static ToastUtils toast;
     public static ConcurrentHashMap<String, List<Cookie>> cookieStore = new ConcurrentHashMap<>();
-    public static String base_ip = "http://192.168.1.50:8080/v1/api";
+    public static String url = "http://192.168.1.50:8080/v1/api";
     @Override
     public void onCreate() {
         super.onCreate();

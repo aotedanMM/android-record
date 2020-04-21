@@ -17,8 +17,7 @@ public class PersonFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        PersonViewModel =
-                ViewModelProviders.of(this).get(PersonViewModel.class);
+        PersonViewModel = ViewModelProviders.of(this).get(PersonViewModel.class);
         View root = inflater.inflate(R.layout.fragment_person, container, false);
 //        final TextView textView = root.findViewById(R.id.text_dashboard);
 //        PersonViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
