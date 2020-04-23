@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#409EFF</color>
     <color name="colorAccent">#d3d7d9</color>
     <color name="colorMainText">#333</color>
+    <color name="colorBackground">#f5f5f6</color>
     <!--次要文字-->
     <color name="colorMinor">#999999</color>
     <color name="borderLine">#d3d7d9</color>

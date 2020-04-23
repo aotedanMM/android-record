@@ -9,10 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-    <LinearLayout
+
+        <!--标题栏-->
+        <include layout="@layout/title_bar"/>
+        <!--分类-->
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/whiteColor"
         tools:ignore="MissingConstraints">
         <LinearLayout
             android:layout_width="match_parent"
@@ -143,5 +148,46 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+        <!--搜索-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+            <EditText
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:id="@+id/search_edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:hint="请输入员工姓名"
+                android:background="@drawable/input_border_small" />
+            <TextView
+                android:id="@+id/search_btn"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:textSize="15sp"
+                android:text="搜索"
+                android:background="@drawable/btn_primary_small"
+                android:layout_width="80dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <!--列表-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:paddingBottom="60dp"
+            android:orientation="horizontal">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/collect_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

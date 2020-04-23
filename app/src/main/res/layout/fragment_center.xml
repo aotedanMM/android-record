@@ -10,6 +10,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
     <!--个人中心-->
+        <!--标题栏-->
+        <include layout="@layout/title_bar"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -65,7 +67,7 @@
                 android:layout_weight="1"
                 android:textColor="#fff"
                 android:textSize="16sp"
-                android:background="@drawable/primary_btn"
+                android:background="@drawable/btn_primary"
                 android:text="@string/send_text_btn"/>
         </LinearLayout>
         <LinearLayout
@@ -81,7 +83,7 @@
                 android:layout_marginRight="30dp"
                 android:textColor="#fff"
                 android:textSize="16sp"
-                android:background="@drawable/success_btn"
+                android:background="@drawable/btn_success"
                 android:text="@string/record_btn"/>
             <Button
                 android:id="@+id/play_btn"
@@ -100,9 +102,25 @@
                 android:layout_weight="1"
                 android:textColor="#fff"
                 android:textSize="16sp"
-                android:background="@drawable/primary_btn"
+                android:background="@drawable/btn_primary"
                 android:text="@string/send_btn"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/logout_btn"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/btn_logout"
+                android:textColor="#333"
+                android:text="退出登录"/>
+        </LinearLayout>
     </LinearLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

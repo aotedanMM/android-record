@@ -43,4 +43,11 @@
         <item name="android:textColor">@color/whiteColor</item>
         <item name="android:layout_marginLeft">10dp</item>
     </style>
+    <!--实时气体监测-->
+    <style name="gasList">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#333333</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
 </resources>

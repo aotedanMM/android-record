@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/whiteColor">
+
+    <TextView
+        android:id="@+id/gas_staff_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/gasList"
+        android:text="员工姓名：王大锤"/>
+    <TextView
+        android:id="@+id/gas_group_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/gasList"
+        android:text="部门:机电三科"/>
+    <TextView
+        android:id="@+id/gas_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/gasList"
+        android:text="入井时间：2020-04-23"/>
+
+    <TextView
+        android:id="@+id/gas_create_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/gasList"
+        android:text="最近定位时间：2020-04-23"/>
+    <TextView
+        android:id="@+id/gas_position"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/gasList"
+        android:text="井下时长:01天3小时15分"/>
+
+</LinearLayout>

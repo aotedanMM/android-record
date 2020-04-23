@@ -1,6 +1,7 @@
 package com.example.aotedan;
 
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.Button;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,8 @@ public class IndexActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide(); // 隐藏AppCompatActivity的默认标题栏
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -28,7 +31,6 @@ public class IndexActivity extends AppCompatActivity {
     }
     private void initView(){
 //        init();
-
     }
 
 }

@@ -38,7 +38,8 @@
             android:textSize="18sp"
             android:inputType="text"
             android:maxLines="1"
-            android:textColor="#000000"
+            android:text="13243210010"
+            android:textColor="#333"
             android:hint="@string/user_account"/>
         </LinearLayout>
         <View
@@ -64,7 +65,8 @@
                 android:textSize="18sp"
                 android:inputType="textWebPassword"
                 android:maxLines="1"
-                android:textColor="#000000"
+                android:text="123456"
+                android:textColor="#333"
                 android:hint="@string/user_psd"/>
         </LinearLayout>
         <View

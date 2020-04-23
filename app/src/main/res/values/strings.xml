@@ -49,11 +49,18 @@
     <string name="bottom_btn4">个人中心</string>
 
     <string name="title_activity_index">activity_index</string>
-    <!--气体-->
+    <!--气体监测-->
     <string name="gas_sort1">甲烷</string>
     <string name="gas_sort2">一氧化碳</string>
     <string name="gas_sort3">氧气</string>
     <string name="gas_sort4">温度</string>
     <string name="gas_sort5">湿度</string>
+    <!--人员监测-->
+    <string name="person1_sort">井下总人员</string>
+    <string name="person2_sort">超时人员</string>
+    <string name="person3_sort">严重超时人员</string>
+    <string name="person4_sort">缺勤人员</string>
+    <string name="person5_sort">重点区域人员</string>
+    <string name="person6_sort">限制区域人员</string>
 
 </resources>

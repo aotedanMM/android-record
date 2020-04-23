@@ -84,64 +84,56 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private void login() {
         name = user_account.getText().toString().trim();
         psd = user_psd.getText().toString().trim();
-//        if (name.equals("")) {
-//            App.toast.ToastMessageShort("请输入账号");
-//            return;
-//        }
-//        if (psd.equals("")) {
-//            App.toast.ToastMessageShort("请输入密码");
-//            return;
-//        }
-        Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
-        startActivity(intent);
-        // 保存用户信息到本地
-//        String user_name = loginDataBean.getData().getStaffName();
-//        String user_phone = loginDataBean.getData().getStaffPhone();
-        sh.save("王大锤","1573333221");
-
-//        new Thread(new Runnable() {//在这个方法中同样还是先开启了一个子线程
-//            @Override
-//            public void run() {
-//                try {
-//                    MediaType mediaType  = MediaType.parse("application/json; charset=utf-8");
-//                    JSONObject json = new JSONObject();
-//                    // 13536951364 、13243210010
-//                    json.put("wxUserAccount","13243210010");
-//                    json.put("wxUserPassword","123456");
-//                    String http_url = "http://192.168.1.50:8080/v1/api/wx/login";
-//                    OkHttpClient client = new OkHttpClient();
-//                    RequestBody requestBody = FormBody.create(mediaType , json.toString());
-//                    Request request = new Request.Builder()
-//                            .header("Authorization","13243210010")
-//                            .url(http_url)
-//                            .post(requestBody)
-//                            .build();
-//                    Response response = client.newCall(request).execute();//接收服务器返回的数据
-//                    String responseData = response.body().string();//得到具体数据
-//                    Log.i("resp",responseData);
-//                    Gson gson = new Gson();
-//                    loginDataBean = gson.fromJson(responseData,LoginDataBean.class);
-//                    if(loginDataBean.getCode() == 200) {
-//                        Looper.prepare();
-//                        App.toast.ToastMessageShort(loginDataBean.getMsg());
-//                        Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
-//                        startActivity(intent);
-//                        // 保存用户信息到本地
-//                        String user_name = loginDataBean.getData().getStaffName();
-//                        String user_phone = loginDataBean.getData().getStaffPhone();
-//                        sh.save(user_name,user_phone);
-//                        Looper.loop();
-//
-//                    } else {
-//                        Looper.prepare();
-//                        App.toast.ToastMessageShort(loginDataBean.getMsg());
-//                        Looper.loop();
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }).start();
+        if (name.equals("")) {
+            App.toast.ToastMessageShort("请输入账号");
+            return;
+        }
+        if (psd.equals("")) {
+            App.toast.ToastMessageShort("请输入密码");
+            return;
+        }
+        new Thread(new Runnable() {//在这个方法中同样还是先开启了一个子线程
+            @Override
+            public void run() {
+                try {
+                    MediaType mediaType  = MediaType.parse("application/json; charset=utf-8");
+                    JSONObject json = new JSONObject();
+                    // 13536951364 、13243210010
+                    json.put("wxUserAccount",name);
+                    json.put("wxUserPassword",psd);
+                    String http_url = "http://192.168.1.50:8080/v1/api/wx/login";
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = FormBody.create(mediaType , json.toString());
+                    Request request = new Request.Builder()
+                            .header("Authorization","13243210010")
+                            .url(http_url)
+                            .post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();//接收服务器返回的数据
+                    String responseData = response.body().string();//得到具体数据
+                    Log.i("resp",responseData);
+                    Gson gson = new Gson();
+                    loginDataBean = gson.fromJson(responseData,LoginDataBean.class);
+                    if(loginDataBean.getCode() == 200) {
+                        Looper.prepare();
+                        App.toast.ToastMessageShort(loginDataBean.getMsg());
+                        Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
+                        startActivity(intent);
+                        // 保存用户信息到本地
+                        String user_name = loginDataBean.getData().getStaffName();
+                        String user_phone = loginDataBean.getData().getStaffPhone();
+                        sh.save(user_name,user_phone);
+                        Looper.loop();
+                    } else {
+                        Looper.prepare();
+                        App.toast.ToastMessageShort(loginDataBean.getMsg());
+                        Looper.loop();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
     private void register() {
         Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
