@@ -6,32 +6,32 @@
     android:background="@color/whiteColor">
 
     <TextView
-        android:id="@+id/gas_staff_name"
+        android:id="@+id/staff_staff_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/gasList"
         android:text="员工姓名：王大锤"/>
     <TextView
-        android:id="@+id/gas_group_name"
+        android:id="@+id/staff_group_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/gasList"
         android:text="部门:机电三科"/>
     <TextView
-        android:id="@+id/gas_content"
+        android:id="@+id/staff_in_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/gasList"
         android:text="入井时间：2020-04-23"/>
 
     <TextView
-        android:id="@+id/gas_create_time"
+        android:id="@+id/staff_near_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/gasList"
         android:text="最近定位时间：2020-04-23"/>
     <TextView
-        android:id="@+id/gas_position"
+        android:id="@+id/staff_time_long"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/gasList"

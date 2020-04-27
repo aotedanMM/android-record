@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <!--标题栏-->
         <include layout="@layout/title_bar"/>
         <!--分类-->
@@ -155,24 +154,22 @@
             android:layout_margin="10dp"
             android:orientation="horizontal">
             <EditText
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:id="@+id/search_edit"
-                android:layout_width="match_parent"
+                android:id="@+id/gas_staff_edit"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:hint="请输入员工姓名"
-                android:background="@drawable/input_border_small" />
-            <TextView
+                style="@style/gasEdit"
+                android:background="@drawable/input_border_small"
+                android:hint="@string/search_edit"/>
+            <Button
                 android:id="@+id/search_btn"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:textSize="15sp"
-                android:text="搜索"
-                android:background="@drawable/btn_primary_small"
                 android:layout_width="80dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:gravity="center"
+                style="@style/searchBtn"
+                android:background="@drawable/btn_primary_small"
+                android:text="@string/search_btn"
+                />
         </LinearLayout>
         <!--列表-->
         <LinearLayout

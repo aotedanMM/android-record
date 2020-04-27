@@ -1,4 +1,4 @@
-package com.example.aotedan.ui.gas;
+package com.example.aotedan.Entity;
 
 import java.io.Serializable;
 

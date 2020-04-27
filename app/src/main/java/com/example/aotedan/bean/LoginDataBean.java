@@ -1,76 +1,56 @@
 package com.example.aotedan.bean;
-/**
- * {"code":200,
- * "data":{"deptId":12,"deptName":"X煤集团/机电部门/机电三科","isPerson":3,"jobId":7,"jobName":"技增","remark":"0",
- * "staffIdCard":"136263199102162681","staffName":"祁翰继","staffPhone":"13243210010","staffSex":0},
- * "msg":"成功！"}
- */
 
 public class LoginDataBean {
     private int code;
     private String msg;
     private DataBean data;
-
     public int getCode() {
         return code;
-    }
-    public String getMsg() {
-        return msg;
     }
 
     public DataBean getData() {
         return data;
     }
 
+    public String getMsg() {
+        return msg;
+    }
+
+    /**
+     *         "account":"admin",
+     *         "headimg":"/img/admin/1.jpg",
+     *         "lastLoginTime":1534921785000,
+     *         "phone":"13260084118",
+     *         "token":"44d0e8bb3ed8401aab153fcde26507a2",
+     *         "userId":0,
+     *         "userName":"管理员"
+     */
+
     public static class DataBean{
-        private int deptId;
-        private String deptName;
-        private int isPerson;
-        private int jobId;
-        private String jobName;
-        private int remark;
-        private String staffIdCard;
-        private String staffName;
-        private String staffPhone;
-        private int staffSex;
+        private String account;
+        private String phone;
+        private String token;
+        private int user_id;
+        private String user_name;
 
-        public int getDeptId() {
-            return deptId;
+        public String getAccount() {
+            return account;
         }
 
-        public String getDeptName() {
-            return deptName;
+        public String getPhone() {
+            return phone;
         }
 
-        public int getIsPerson() {
-            return isPerson;
+        public String getToken() {
+            return token;
         }
 
-        public int getJobId() {
-            return jobId;
+        public int getUser_id() {
+            return user_id;
         }
 
-        public String getJobName() {
-            return jobName;
-        }
-        public int getRemark() {
-            return remark;
-        }
-
-        public String getStaffIdCard() {
-            return staffIdCard;
-        }
-
-        public String getStaffName() {
-            return staffName;
-        }
-
-        public String getStaffPhone() {
-            return staffPhone;
-        }
-
-        public int getStaffSex() {
-            return staffSex;
+        public String getUser_name() {
+            return user_name;
         }
     }
 }

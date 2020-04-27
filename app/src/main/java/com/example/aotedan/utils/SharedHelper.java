@@ -19,13 +19,13 @@ public class SharedHelper {
     }
 
     //定义一个保存数据的方法
-    public void save(String user_name, String user_phone) {
+    public void save(String user_name, String user_phone,String token) {
         SharedPreferences sp = mContext.getSharedPreferences("mysp", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("user_name", user_name);
         editor.putString("user_phone", user_phone);
+        editor.putString("token", token);
         editor.commit();
-//        Toast.makeText(mContext, "信息已写入SharedPreference中", Toast.LENGTH_SHORT).show();
     }
 
     //定义一个读取SP文件的方法
@@ -34,6 +34,7 @@ public class SharedHelper {
         SharedPreferences sp = mContext.getSharedPreferences("mysp", Context.MODE_PRIVATE);
         data.put("user_name", sp.getString("user_name", ""));
         data.put("user_phone", sp.getString("user_phone", ""));
+        data.put("token",sp.getString("token",""));
         return data;
     }
 }

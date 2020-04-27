@@ -9,10 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-    <!--个人中心-->
+        <!--个人中心-->
         <!--标题栏-->
         <include layout="@layout/title_bar"/>
-    <LinearLayout
+        <!--顶部个人中心-->
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:orientation="horizontal"
@@ -39,76 +40,98 @@
             style="@style/center_text" />
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        <!--功能分类-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/voice_chat"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@mipmap/phone" />
+                <TextView
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:gravity="center_vertical"
+                    android:text="语音通话" />
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:background="@mipmap/more" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/borderLine"/>
+             <LinearLayout
+            android:id="@+id/history_record"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@mipmap/history" />
+            <TextView
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:gravity="center_vertical"
+                android:text="历史超标" />
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:background="@mipmap/more" />
+        </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/borderLine"/>
+            <LinearLayout
+                android:id="@+id/about_us"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@mipmap/about" />
+                <TextView
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:gravity="center_vertical"
+                    android:text="关于我们" />
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:background="@mipmap/more" />
+            </LinearLayout>
+        </LinearLayout>
+        <!--退出登录-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/send_text"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_weight="4"
-                android:layout_marginRight="20dp"
-                android:textSize="16sp"
-                android:background="@drawable/main_input"
-                android:hint="@string/send_text"
-                />
-            <Button
-                android:id="@+id/send_text_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:textColor="#fff"
-                android:textSize="16sp"
-                android:background="@drawable/btn_primary"
-                android:text="@string/send_text_btn"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/record_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_marginRight="30dp"
-                android:textColor="#fff"
-                android:textSize="16sp"
-                android:background="@drawable/btn_success"
-                android:text="@string/record_btn"/>
-            <Button
-                android:id="@+id/play_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:textColor="#fff"
-                android:textSize="16sp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/error_btn"
-                android:text="@string/play_btn"/>
-            <Button
-                android:id="@+id/send_voice_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:textColor="#fff"
-                android:textSize="16sp"
-                android:background="@drawable/btn_primary"
-                android:text="@string/send_btn"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="50dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:orientation="vertical">
@@ -120,7 +143,6 @@
                 android:textColor="#333"
                 android:text="退出登录"/>
         </LinearLayout>
-    </LinearLayout>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

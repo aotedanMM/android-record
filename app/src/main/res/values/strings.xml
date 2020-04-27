@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">中科鑫合</string>
+    <!--通用-->
+    <string name="search_edit">请输入员工姓名</string>
+    <string name="search_btn">查询</string>
     <!-- 语音-->
     <string name="get_btn">get请求</string>
     <string name="get_view">get请求获取到的内容</string>
@@ -62,5 +65,6 @@
     <string name="person4_sort">缺勤人员</string>
     <string name="person5_sort">重点区域人员</string>
     <string name="person6_sort">限制区域人员</string>
+
 
 </resources>
