@@ -13,7 +13,7 @@ import javax.net.ssl.X509TrustManager;
 
 public class SSLSocketClient {
     //获取这个SSLSocketFactory
-    public static SSLSocketFactory getSSLSocketFactory() {
+    public static SSLSocketFactory SSLSocketFactory() {
         try {
             SSLContext sslContext = SSLContext.getInstance("SSL");
             sslContext.init(null, getTrustManager(), new SecureRandom());
