@@ -1,26 +1,12 @@
 package com.example.aotedan.network;
-
-
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.Environment;
 import android.util.Log;
-
 import com.example.aotedan.App.App;
-import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.builder.PostFormBuilder;
-import com.zhy.http.okhttp.callback.FileCallBack;
 import com.zhy.http.okhttp.callback.StringCallback;
-
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
-
-import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -76,6 +62,7 @@ public class NetworkRequest {
                 OkHttpUtils
                         .postString()
                         .url(url)
+                        .addHeader("Authorization",App.token)
                         .content(String.valueOf(json))
                         .mediaType(MediaType.parse("application/json; charset=utf-8"))
                         .build()
@@ -103,11 +90,11 @@ public class NetworkRequest {
             if (!NetworkUtils.isNetAvailable(context)) {
                 App.toast.ToastMessageLong("网络开小差了哦");
                 request.error("未访问");
-
             } else {
                 OkHttpUtils
                         .get()
                         .url(url)
+                        .addHeader("Authorization",App.token)
                         .addParams("gasFlag", String.valueOf(flag))
                         .addParams("page",String.valueOf(page))
                         .addParams("limit",String.valueOf(limit))
@@ -115,15 +102,14 @@ public class NetworkRequest {
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int i) {
-
+                                App.toast.ToastMessageShort("网络开小差了哦");
+                                request.error("error");
                             }
-
                             @Override
-                            public void onResponse(String s, int i) {
-
+                            public void onResponse(String resp, int i) {
+                                request.success(resp);
                             }
                         });
-
             }
         }
     }
@@ -141,18 +127,21 @@ public class NetworkRequest {
             } else {
                 OkHttpUtils
                         .get()
+                        .addHeader("Authorization",App.token)
                         .url(url)
                         .build()
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int i) {
+                                request.error("error");
+                                App.toast.ToastMessageShort("网络开小差了哦");
                             }
 
                             @Override
-                            public void onResponse(String s, int i) {
+                            public void onResponse(String resp, int i) {
+                                request.success(resp);
                             }
                         });
-
             }
         }
     }

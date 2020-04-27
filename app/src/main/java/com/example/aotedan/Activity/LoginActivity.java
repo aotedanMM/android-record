@@ -14,22 +14,17 @@ import com.example.aotedan.App.App;
 import com.example.aotedan.IndexActivity;
 import com.example.aotedan.R;
 import com.example.aotedan.bean.LoginDataBean;
-import com.example.aotedan.utils.SSLSocketClient;
+import com.example.aotedan.network.NetworkRequest;
 import com.example.aotedan.utils.SharedHelper;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.IOException;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import java.util.HashMap;
+import java.util.Map;
+//import com.zhy.http.okhttp.OkHttpUtils;
+
 
 public class LoginActivity extends Activity implements View.OnClickListener {
     private Handler handler;
@@ -66,7 +61,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         handler = new Handler();
         setView();
     }
-
     private void setView() {
         login_btn.setOnClickListener(this);
         register.setOnClickListener(this);
@@ -87,7 +81,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 break;
         }
     }
-    private void login() {
+    public void login() {
         name = user_account.getText().toString().trim();
         psd = user_psd.getText().toString().trim();
         if (name.equals("")) {
@@ -98,52 +92,41 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             App.toast.ToastMessageShort("请输入密码");
             return;
         }
-        MediaType mediaType  = MediaType.parse("application/json; charset=utf-8");
         JSONObject json = new JSONObject();
         try {
-            json.put("account",name);
-            json.put("passWord",psd);
+            json.put("account","admin");
+            json.put("passWord","123456");
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        String url = "https://192.168.1.50:8443/v1/api/login";
-        OkHttpClient okHttpClient = new OkHttpClient()
-                .newBuilder()
-                .sslSocketFactory(SSLSocketClient.SSLSocketFactory())//配置
-                .hostnameVerifier(SSLSocketClient.getHostnameVerifier())//配置
-                .build();
-        RequestBody requestBody = FormBody.create(mediaType , json.toString());
-        final Request request = new Request.Builder()
-                .url(url)
-                .post(requestBody)
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        String url = App.url + "/login";
+        NetworkRequest.RequestPostParams(mContext,url, json, new com.example.aotedan.network.Request() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                Log.i("TAG", String.valueOf(e));
-                Looper.prepare();
-                App.toast.ToastMessageShort(String.valueOf(e));
-                Looper.loop();
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String responseData = response.body().string();//得到具体数据
-                Log.i("resp",responseData);
+            public void success(String responseData) {
+                Log.i("resp",String.valueOf(responseData));
                 Gson gson = new Gson();
                 loginDataBean = gson.fromJson(responseData, LoginDataBean.class);
                 if(loginDataBean.getCode()==200){
-                    handler.post(activityToIndex);
-//                     保存用户信息到本地
-                    String user_name = loginDataBean.getData().getUser_name();
+                    // 保存用户信息到本地
+                    String user_name = loginDataBean.getData().getAccount();
                     String user_phone = loginDataBean.getData().getPhone();
                     String token = loginDataBean.getData().getToken();
                     sh.save(user_name,user_phone,token);
+                    App.token = loginDataBean.getData().getToken();
+                    // 跳转到首页
+                    handler.post(activityToIndex);
                 } else {
                     Looper.prepare();
                     App.toast.ToastMessageShort(loginDataBean.getMsg());
                     Looper.loop();
                 }
+            }
+            @Override
+            public void error(String error) {
+                Log.i("error",error);
+                Looper.prepare();
+                App.toast.ToastMessageShort(String.valueOf(error));
+                Looper.loop();
             }
         });
     }
@@ -165,10 +148,4 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             startActivity(intent);
         }
     };
-//    private Runnable activityToIndex2 =new  Runnable(){
-//        @Override
-//        public void run() {
-//           App.toast.ToastMessageShort(String.valueOf());
-//        }
-//    };
 }

@@ -21,6 +21,7 @@ import com.example.aotedan.App.App;
 import com.example.aotedan.Entity.GasEntity;
 import com.example.aotedan.R;
 import com.example.aotedan.bean.GasDataBean;
+import com.example.aotedan.network.NetworkRequest;
 import com.google.gson.Gson;
 import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
@@ -83,35 +84,12 @@ public class GasFragment extends Fragment implements View.OnClickListener {
             initData(search_name);
         }
     }
+
     private void initData(String params) {
-        // get请求带参数
-        Request.Builder reqBuild = new Request.Builder()
-                .header("Authorization","13243210010");
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("http://192.168.1.50:8080/v1/api/gas/findRtGasInfoByStaffName")
-                .newBuilder();
-        urlBuilder.addQueryParameter("gasFlag","1");
-        urlBuilder.addQueryParameter("page","1");
-        urlBuilder.addQueryParameter("limit","20");
-        if(params != null){
-            urlBuilder.addQueryParameter("staffName",params);
-        }
-        reqBuild.url(urlBuilder.build());
-        Request request = reqBuild.build();
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Log.i("params",String.valueOf(urlBuilder));
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        String url = "http://192.168.1.50:8080/v1/api/gas/findRtGasInfoByStaffName";
+        NetworkRequest.RequestGetParams(getActivity(), url, 1, 1, 20, new com.example.aotedan.network.Request() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.d("failure","onFailure");
-                Looper.prepare();
-                App.toast.ToastMessageShort(String.valueOf(e));
-                Looper.loop();
-            }
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                String resp = response.body().string();
-                Log.i("resp",resp);
+            public void success(String resp) {
                 Gson gson = new Gson();
                 gasDataBean = gson.fromJson(resp,GasDataBean.class);
                 if(gasDataBean.getCode() == 200) {
@@ -132,15 +110,14 @@ public class GasFragment extends Fragment implements View.OnClickListener {
                     handler.post(loadRecyclerView);
                 } else if(gasDataBean.getCode() == 111){
                     handler.post(resetRecyclerView);
-                }else{
-                    Looper.prepare();
-                    App.toast.ToastMessageShort(gasDataBean.getMsg());
-                    Looper.loop();
                 }
+            }
+            @Override
+            public void error(String error) {
+                Log.i("error",error);
             }
         });
     }
-    // 渲染recyclerView
     private Runnable loadRecyclerView = new  Runnable(){
         @Override
         public void run() {

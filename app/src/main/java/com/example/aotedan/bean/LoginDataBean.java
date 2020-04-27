@@ -30,8 +30,8 @@ public class LoginDataBean {
         private String account;
         private String phone;
         private String token;
-        private int user_id;
-        private String user_name;
+        private int userId;
+        private String userName;
 
         public String getAccount() {
             return account;
@@ -45,12 +45,12 @@ public class LoginDataBean {
             return token;
         }
 
-        public int getUser_id() {
-            return user_id;
+        public int getUserId() {
+            return userId;
         }
 
-        public String getUser_name() {
-            return user_name;
+        public String getUserName() {
+            return userName;
         }
     }
 }

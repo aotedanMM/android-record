@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.example.aotedan.utils.SharedHelper;
 import com.example.aotedan.utils.ToastUtils;
+import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -13,8 +14,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Handler;
 
 import okhttp3.Cookie;
+import okhttp3.OkHttpClient;
 
-@SuppressLint("Registered")
+//@SuppressLint("Registered")
 public class App extends Application {
     @SuppressLint("StaticFieldLeak")
     public static ToastUtils toast;

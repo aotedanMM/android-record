@@ -106,16 +106,21 @@ public class CenterFragment extends Fragment implements View.OnClickListener{
     // 退出登录
     private void logout() {
         // get请求带参数
-        Request.Builder reqBuild = new Request.Builder();
-        HttpUrl.Builder urlBuilder =HttpUrl.parse("http://192.168.1.50:8080/v1/api/wx/logout")
-                .newBuilder();
-        urlBuilder.addQueryParameter("key","13243210010");
-        reqBuild.url(urlBuilder.build());
-        Request request = reqBuild.build();
+//        Request.Builder reqBuild = new Request.Builder();
+//
+//        HttpUrl.Builder urlBuilder =HttpUrl.parse(url)
+//                .newBuilder();
+//        urlBuilder.addQueryParameter("key","13243210010");
+//        reqBuild.url(urlBuilder.build());
+//        Request request = reqBuild.build();
 
+        String url = App.url + "/logout";
         OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .header("Authorization",App.token)
+                .url(url)
+                .build();
         Call call = okHttpClient.newCall(request);
-
         call.enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
@@ -128,7 +133,7 @@ public class CenterFragment extends Fragment implements View.OnClickListener{
                 Gson gson = new Gson();
                 baseRequestDataBean = gson.fromJson(resp,BaseRequestDataBean.class);
                 if(baseRequestDataBean.getCode()==200){
-//                    App.toast.ToastMessageShort(baseRequestDataBean.getMsg());
+                    sh.save("","",""); // 退出登录、清除缓存数据
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent);
                 } else {

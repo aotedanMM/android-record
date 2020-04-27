@@ -16,6 +16,7 @@ import com.example.aotedan.App.App;
 import com.example.aotedan.R;
 import com.example.aotedan.bean.DownHoleNumBean;
 import com.example.aotedan.bean.WarnAreaNumBean;
+import com.example.aotedan.network.NetworkRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -33,12 +34,6 @@ public class HomeFragment extends Fragment{
     private DownHoleNumBean downHoleNum;
     private WarnAreaNumBean warnAreaNum;
     private JSONObject personNumData;
-    private String sumStaff;
-    private String overTimeStaff;
-    private String seriousTimeStaff;
-    private String unAttendanceStaff;
-    private String importantStaff;
-    private String limitStaff;
     private View home;
     private TextView person_sort1_num;
     private TextView person_sort2_num;
@@ -48,7 +43,12 @@ public class HomeFragment extends Fragment{
     private TextView person_sort6_num;
     private String api_url;
     private int staffNumType;
-
+    private int totalNum;
+    private int timeoutNum;
+    private int seriousTimeNum;
+    private int unAttendanceNum;
+    private int importantNum;
+    private int limitNum;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         home = inflater.inflate(R.layout.fragment_home, container, false);
         //创建属于主线程的handler
@@ -77,216 +77,178 @@ public class HomeFragment extends Fragment{
     }
     // 获取井下总人数
     private void handleFetchTotalNum(){
+        Log.i("token",App.token);
         api_url = App.url + "/attendance/getRtAttendanceStaff";
-        OkHttpClient okHttpClient = new OkHttpClient();
-        final Request request = new Request.Builder()
-                .header("Authorization",App.token)
-                .url(api_url)
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        NetworkRequest.RequestGet(getActivity(), api_url, new com.example.aotedan.network.Request() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                Log.d("TAG", String.valueOf(e));
-                Looper.prepare();
-                App.toast.ToastMessageShort(String.valueOf(e));
-                Looper.loop();
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String responseData = response.body().string();//得到具体数据
-                Log.i("总人数",responseData);
+            public void success(String responseData) {
+                Log.i("success",responseData);
                 Gson gson = new Gson();
                 downHoleNum = gson.fromJson(responseData, DownHoleNumBean.class);
                 if(downHoleNum.getCode()==200){
-                    Looper.prepare();
-                    person_sort1_num.setText(String.valueOf(downHoleNum.getData().getTotal()));
-                    Looper.loop();
+                    totalNum = downHoleNum.getData().getTotal();
+                    handler.post(setTotalNum);
                 }
+            }
+            @Override
+            public void error(String error) {
+                Log.i("error",error);
             }
         });
     }
-    // 获取井下超时人数
+    // 获取井下总人数
     private void handleFetchTimeOutStaffNum(){
+        Log.i("token",App.token);
         api_url = App.url + "/attendance/getOverTimeStaff";
-        OkHttpClient okHttpClient = new OkHttpClient();
-        final Request request = new Request.Builder()
-                .header("Authorization",App.token)
-                .url(api_url)
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        NetworkRequest.RequestGet(getActivity(), api_url, new com.example.aotedan.network.Request() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                Log.d("TAG", String.valueOf(e));
-                Looper.prepare();
-                App.toast.ToastMessageShort(String.valueOf(e));
-                Looper.loop();
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String responseData = response.body().string();//得到具体数据
-                Log.i("超时",responseData);
+            public void success(String responseData) {
+                Log.i("success",responseData);
                 Gson gson = new Gson();
                 downHoleNum = gson.fromJson(responseData, DownHoleNumBean.class);
                 if(downHoleNum.getCode()==200){
-                    Looper.prepare();
-                    person_sort2_num.setText(String.valueOf(downHoleNum.getData().getTotal()));
-                    Looper.loop();
+                    timeoutNum = downHoleNum.getData().getTotal();
+                    handler.post(setTimeoutNum);
                 }
+            }
+            @Override
+            public void error(String error) {
+                Log.i("error",error);
             }
         });
     }
     // 获取井下严重超时人数
     private void handleFetchSevereTimeOutStaffNum(){
+        Log.i("token",App.token);
         api_url = App.url + "/attendance/getSeriousTimeStaff";
-        OkHttpClient okHttpClient = new OkHttpClient();
-        final Request request = new Request.Builder()
-                .header("Authorization",App.token)
-                .url(api_url)
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        NetworkRequest.RequestGet(getActivity(), api_url, new com.example.aotedan.network.Request() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                Log.d("TAG", String.valueOf(e));
-                Looper.prepare();
-                App.toast.ToastMessageShort(String.valueOf(e));
-                Looper.loop();
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String responseData = response.body().string();//得到具体数据
-                Log.i("严重超时",responseData);
+            public void success(String responseData) {
+                Log.i("success",responseData);
                 Gson gson = new Gson();
                 downHoleNum = gson.fromJson(responseData, DownHoleNumBean.class);
                 if(downHoleNum.getCode()==200){
-                    Looper.prepare();
-                    person_sort3_num.setText(String.valueOf(downHoleNum.getData().getTotal()));
-                    Looper.loop();
+                    seriousTimeNum = downHoleNum.getData().getTotal();
+                    handler.post(setSeriousTimeNum);
                 }
+            }
+            @Override
+            public void error(String error) {
+                Log.i("error",error);
             }
         });
     }
     // 获取井下缺勤人数
     private void handleFetchAbsenceStaffNum(){
+        Log.i("token",App.token);
         api_url = App.url + "/attendance/getUnAttendanceStaff";
-        OkHttpClient okHttpClient = new OkHttpClient();
-        final Request request = new Request.Builder()
-                .header("Authorization",App.token)
-                .url(api_url)
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        NetworkRequest.RequestGet(getActivity(), api_url, new com.example.aotedan.network.Request() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                Log.d("TAG", String.valueOf(e));
-                Looper.prepare();
-                App.toast.ToastMessageShort(String.valueOf(e));
-                Looper.loop();
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String responseData = response.body().string();//得到具体数据
-                Log.i("缺勤",responseData);
+            public void success(String responseData) {
+                Log.i("success",responseData);
                 Gson gson = new Gson();
                 downHoleNum = gson.fromJson(responseData, DownHoleNumBean.class);
                 if(downHoleNum.getCode()==200){
-                    Looper.prepare();
-                    person_sort4_num.setText(String.valueOf(downHoleNum.getData().getTotal()));
-                    Looper.loop();
+                    unAttendanceNum = downHoleNum.getData().getTotal();
+                    handler.post(setUnAttendanceNum);
                 }
+            }
+            @Override
+            public void error(String error) {
+                Log.i("error",error);
             }
         });
     }
+
     // 获取井下重点区域人数
     private void handleFetchImportantAreaStaffNum(){
+        Log.i("token",App.token);
         api_url = App.url + "/warningArea/findStaffNumByType?type=1";
-        OkHttpClient okHttpClient = new OkHttpClient();
-        final Request request = new Request.Builder()
-                .header("Authorization",App.token)
-                .url(api_url)
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        NetworkRequest.RequestGet(getActivity(), api_url, new com.example.aotedan.network.Request() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                Log.d("TAG", String.valueOf(e));
-                Looper.prepare();
-                App.toast.ToastMessageShort(String.valueOf(e));
-                Looper.loop();
+            public void success(String responseData) {
+                Log.i("success",responseData);
+                Gson gson = new Gson();
+                warnAreaNum = gson.fromJson(responseData, WarnAreaNumBean.class);
+                if(warnAreaNum.getCode()==200){
+                    importantNum = warnAreaNum.getData();
+                    handler.post(setImportantNum);
+                }
             }
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String responseData = response.body().string();//得到具体数据
-                Log.i("重点区域",responseData);
-                Gson gson = new Gson();
-                WarnAreaNumBean warnAreaNum = gson.fromJson(responseData, WarnAreaNumBean.class);
-                if(warnAreaNum.getCode()==200){
-                    Looper.prepare();
-                    person_sort5_num.setText(String.valueOf(warnAreaNum.getData()));
-                    Looper.loop();
-                }
+            public void error(String error) {
+                Log.i("error",error);
             }
         });
     }
     // 获取井下限制区域人数
     private void handleFetchLimitAreaStaffNum(){
+        Log.i("token",App.token);
         api_url = App.url + "/warningArea/findStaffNumByType?type=2";
-        OkHttpClient okHttpClient = new OkHttpClient();
-        final Request request = new Request.Builder()
-                .header("Authorization",App.token)
-                .url(api_url)
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        NetworkRequest.RequestGet(getActivity(), api_url, new com.example.aotedan.network.Request() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                Log.d("TAG", String.valueOf(e));
-                Looper.prepare();
-                App.toast.ToastMessageShort(String.valueOf(e));
-                Looper.loop();
+            public void success(String responseData) {
+                Log.i("success",responseData);
+                Gson gson = new Gson();
+                warnAreaNum = gson.fromJson(responseData, WarnAreaNumBean.class);
+                if(warnAreaNum.getCode()==200){
+                    limitNum = warnAreaNum.getData();
+                    handler.post(setLimitNum);
+                }
             }
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String responseData = response.body().string();//得到具体数据
-                Log.i("限制区域",responseData);
-                Gson gson = new Gson();
-                WarnAreaNumBean warnAreaNum = gson.fromJson(responseData, WarnAreaNumBean.class);
-                if(warnAreaNum.getCode()==200){
-                    Looper.prepare();
-                    person_sort6_num.setText(String.valueOf(warnAreaNum.getData()));
-                    Looper.loop();
-                }
+            public void error(String error) {
+                Log.i("error",error);
             }
         });
     }
-    // 构建Runnable对象，在runnable中更新界面
-//    private Runnable runnableUi =new  Runnable(){
-//        @Override
-//        public void run() {
-//            //更新界面
-//            int num = downHoleNum.getData().getTotal();
-//                switch (staffNumType){
-//                    case 1:
-//                        person_sort1_num.setText(String.valueOf(num));
-//                        break;
-//                    case 2:
-//                        person_sort2_num.setText(String.valueOf(num));
-//                        break;
-//                    case 3:
-//                        person_sort3_num.setText(String.valueOf(num));
-//                        break;
-//                    case 4:
-//                        person_sort4_num.setText(String.valueOf(num));
-//                        break;
-//                    case 5:
-//                        person_sort5_num.setText(String.valueOf(num));
-//                        break;
-//                    case 6:
-//                        person_sort6_num.setText(String.valueOf(num));
-//                        break;
-//                }
-//        }
-//    };
+    // 更新井下总人数
+    private Runnable setTotalNum =new  Runnable(){
+        @Override
+        public void run() {
+            //更新界面
+            person_sort1_num.setText(String.valueOf(totalNum));
+        }
+    };
+    // 更新井下超时人数
+    private Runnable setTimeoutNum =new  Runnable(){
+        @Override
+        public void run() {
+            //更新界面
+            person_sort2_num.setText(String.valueOf(timeoutNum));
+        }
+    };
+    // 更新井下严重超时人数
+    private Runnable setSeriousTimeNum =new  Runnable(){
+        @Override
+        public void run() {
+            //更新界面
+            person_sort3_num.setText(String.valueOf(seriousTimeNum));
+        }
+    };
+    // 更新井下缺勤人数
+    private Runnable setUnAttendanceNum =new  Runnable(){
+        @Override
+        public void run() {
+            //更新界面
+            person_sort4_num.setText(String.valueOf(unAttendanceNum));
+        }
+    };
+    // 更新井下重点区域
+    private Runnable setImportantNum =new  Runnable(){
+        @Override
+        public void run() {
+            //更新界面
+            person_sort5_num.setText(String.valueOf(importantNum));
+        }
+    };
+    // 更新井下限制区域
+    private Runnable setLimitNum =new  Runnable(){
+        @Override
+        public void run() {
+            //更新界面
+            person_sort6_num.setText(String.valueOf(limitNum));
+        }
+    };
+
 }
