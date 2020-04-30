@@ -2,11 +2,15 @@ package com.example.aotedan.network;
 import android.content.Context;
 import android.util.Log;
 import com.example.aotedan.App.App;
+import com.google.gson.JsonIOException;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
+import java.util.Map;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -52,12 +56,10 @@ public class NetworkRequest {
         if (!NetworkUtils.isNetConnected(context)) {
             App.toast.ToastMessageLong("当前无网络连接哦");
             request.error("未访问");
-
         } else {
             if (!NetworkUtils.isNetAvailable(context)) {
                 App.toast.ToastMessageLong("网络开小差了哦");
                 request.error("未访问");
-
             } else {
                 OkHttpUtils
                         .postString()
@@ -81,11 +83,10 @@ public class NetworkRequest {
         }
     }
     // get请求带参数
-    public static void RequestGetParams(Context context,String url, int flag,int page,int limit ,final Request request) {
+    public static void RequestGetParams(Context context, String url, Map<String, String> map, final Request request) {
         if (!NetworkUtils.isNetConnected(context)) {
             App.toast.ToastMessageLong("当前无网络连接哦");
             request.error("未访问");
-
         } else {
             if (!NetworkUtils.isNetAvailable(context)) {
                 App.toast.ToastMessageLong("网络开小差了哦");
@@ -94,10 +95,8 @@ public class NetworkRequest {
                 OkHttpUtils
                         .get()
                         .url(url)
+                        .params(map)
                         .addHeader("Authorization",App.token)
-                        .addParams("gasFlag", String.valueOf(flag))
-                        .addParams("page",String.valueOf(page))
-                        .addParams("limit",String.valueOf(limit))
                         .build()
                         .execute(new StringCallback() {
                             @Override

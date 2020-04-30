@@ -53,6 +53,12 @@ public class GasListAdapter extends RecyclerView.Adapter<GasListAdapter.myViewHo
         //根据点击位置绑定数据
         GasEntity data = gasEntityArrayList.get(position);
         holder.gas_ch4.setText("甲烷：" + data.ch4 + "%" + " " +"一氧化碳："+ data.co + "ppm" +  " " +"氧气"+ data.o2 + "%" + " " + "温度：" +data.temperature+ "℃" +  " " +"湿度：" + data.humidity + "%");
+
+        holder.gas_ch4.setText("甲烷："+ data.ch4 + "%");
+        holder.gas_co.setText("一氧化碳："+ data.co + "ppm");
+        holder.gas_o2.setText("氧气："+ data.o2 + "%");
+        holder.gas_temperature.setText("温度："+ data.temperature + "℃");
+        holder.gas_humidity.setText("湿度："+ data.humidity + "%");
         holder.gas_staff_name.setText("姓名："+ data.staff_name);
         holder.gas_group_name.setText("部门：" + data.group_name);
         String time = formatDate(data.createtime);
@@ -78,6 +84,10 @@ public class GasListAdapter extends RecyclerView.Adapter<GasListAdapter.myViewHo
     //自定义viewhodler
     class myViewHodler extends RecyclerView.ViewHolder {
         private TextView gas_ch4;
+        private TextView gas_o2;
+        private TextView gas_co;
+        private TextView gas_temperature;
+        private TextView gas_humidity;
         private TextView gas_staff_name;
         private TextView gas_group_name;
         private TextView gas_create_time;
@@ -85,7 +95,11 @@ public class GasListAdapter extends RecyclerView.Adapter<GasListAdapter.myViewHo
 
         public myViewHodler(View itemView) {
             super(itemView);
-             gas_ch4 = (TextView) itemView.findViewById(R.id.gas_content);
+             gas_ch4 = (TextView) itemView.findViewById(R.id.gas_ch4);
+             gas_o2 = (TextView) itemView.findViewById(R.id.gas_o2);
+             gas_co = (TextView) itemView.findViewById(R.id.gas_co);
+             gas_temperature = (TextView) itemView.findViewById(R.id.gas_temperature);
+             gas_humidity = (TextView) itemView.findViewById(R.id.gas_humidity);
              gas_staff_name = (TextView) itemView.findViewById(R.id.gas_staff_name);
              gas_group_name = (TextView) itemView.findViewById(R.id.gas_group_name);
              gas_position = (TextView) itemView.findViewById(R.id.gas_position);

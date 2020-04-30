@@ -1,45 +1,63 @@
 package com.example.aotedan.ui.gas;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.aotedan.Activity.GasDetailActivity;
 import com.example.aotedan.Adapter.GasListAdapter;
 import com.example.aotedan.App.App;
 import com.example.aotedan.Entity.GasEntity;
 import com.example.aotedan.R;
 import com.example.aotedan.bean.GasDataBean;
 import com.example.aotedan.network.NetworkRequest;
+import com.example.aotedan.utils.InputMethodUtils;
+import com.example.aotedan.view.MyScrollview;
 import com.google.gson.Gson;
-import org.jetbrains.annotations.NotNull;
-import java.io.IOException;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import java.util.Map;
+
+//import java.util.Map;
 
 
-public class GasFragment extends Fragment implements View.OnClickListener {
+
+
+public class GasFragment extends Fragment implements View.OnClickListener,MyScrollview.scrollListener {
     private View gas;
+    private LinearLayout sort_btn1;
+    private LinearLayout sort_btn2;
+    private LinearLayout sort_btn3;
+    private LinearLayout sort_btn4;
+    private LinearLayout sort_btn5;
     private Handler handler;
     private EditText gas_staff_edit;
+    private MyScrollview myScroll;
     private Button search_btn;
     private GasDataBean gasDataBean;
+    private RecyclerView collect_recyclerView;
     public RecyclerView mCollectRecyclerView;//定义RecyclerView
     //定义以goodsentity实体类为对象的数据集合
     private ArrayList<GasEntity> gasEntityArrayList = new ArrayList<GasEntity>();
@@ -49,18 +67,47 @@ public class GasFragment extends Fragment implements View.OnClickListener {
         gas = inflater.inflate(R.layout.fragment_gas, container, false);
         handler = new Handler();
         initView();
+        setTitle();
+        setView();
         initData(null);
-        //模拟数据
-        //对recycleview进行配置
-//        initRecyclerView();
         return gas;
     }
     private void initView(){
-        TextView title_bar = gas.findViewById(R.id.title_bar);
-        title_bar.setText("气体监测");
+        sort_btn1 = gas.findViewById(R.id.sort_btn1);
+        sort_btn2 = gas.findViewById(R.id.sort_btn2);
+        sort_btn3 = gas.findViewById(R.id.sort_btn3);
+        sort_btn4 = gas.findViewById(R.id.sort_btn4);
+        sort_btn5 = gas.findViewById(R.id.sort_btn5);
         gas_staff_edit = gas.findViewById(R.id.gas_staff_edit);
         search_btn = gas.findViewById(R.id.search_btn);
+        collect_recyclerView = gas.findViewById(R.id.collect_recyclerView);
+        myScroll = gas.findViewById(R.id.myScroll);
+    }
+    private void setView() {
         search_btn.setOnClickListener(this);
+        sort_btn1.setOnClickListener(this);
+        sort_btn2.setOnClickListener(this);
+        sort_btn3.setOnClickListener(this);
+        sort_btn4.setOnClickListener(this);
+        sort_btn5.setOnClickListener(this);
+        myScroll.setScroll(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        collect_recyclerView.setLayoutManager(linearLayoutManager);
+//        collect_recyclerView.setHasFixedSize(true);
+//        collect_recyclerView.setNestedScrollingEnabled(false);
+    }
+    @SuppressLint("WrongConstant")
+    private void setTitle() {
+        TextView title_bar = gas.findViewById(R.id.title_bar);
+        title_bar.setText("气体监测");
+        ImageView title_back = gas.findViewById(R.id.title_back);
+        title_back.setVisibility(4);
     }
     @Override
     public void onClick(View v) {
@@ -68,28 +115,49 @@ public class GasFragment extends Fragment implements View.OnClickListener {
             case R.id.search_btn:
                 handleFetchStaffGasData();
                 break;
+            case R.id.sort_btn1:
+                handleFetchGasDetails("ch4");
+                break;
+            case R.id.sort_btn2:
+                handleFetchGasDetails("co");
+                break;
+            case R.id.sort_btn3:
+                handleFetchGasDetails("o2");
+                break;
+            case R.id.sort_btn4:
+                handleFetchGasDetails("temperature");
+                break;
+            case R.id.sort_btn5:
+                handleFetchGasDetails("humidity");
+                break;
         }
+    }
+    private void handleFetchGasDetails(String type){
+        Intent intent = new Intent(getActivity(), GasDetailActivity.class);
+        intent.putExtra("key",type);
+        startActivity(intent);
     }
     // 根据员工姓名查找气体数据
     private void handleFetchStaffGasData() {
-        String search_name = gas_staff_edit.getText().toString().trim();
-        if(search_name.equals("")) {
-            App.toast.ToastMessageShort("请输入要查询的员工姓名");
-            initData(null);
-            return;
-        } else {
-            // 每次查询先清空原有的数据
-            gasEntityArrayList.clear();
-            mCollectRecyclerAdapter.notifyDataSetChanged();
-            initData(search_name);
-        }
+        // 每次查询先清空原有的数据、清空列表
+        gasEntityArrayList.clear();
+        mCollectRecyclerAdapter.notifyDataSetChanged();
+        String staff_name = gas_staff_edit.getText().toString().trim();
+        initData(staff_name);
+        InputMethodUtils.showOrHide(getActivity()); // 显示、隐藏输入法
     }
-
-    private void initData(String params) {
-        String url = "http://192.168.1.50:8080/v1/api/gas/findRtGasInfoByStaffName";
-        NetworkRequest.RequestGetParams(getActivity(), url, 1, 1, 20, new com.example.aotedan.network.Request() {
+    private void initData(String name) {
+        String url = App.url+ "/gas/findRtGasInfoByStaffName";
+        Map<String ,String> map = new ArrayMap<>();
+        map.put("page","1");
+        map.put("limit","20");
+        if(name != null) {
+            map.put("staffName",name);
+        }
+        NetworkRequest.RequestGetParams(getActivity(), url, map,new com.example.aotedan.network.Request() {
             @Override
             public void success(String resp) {
+                Log.i("gas",resp);
                 Gson gson = new Gson();
                 gasDataBean = gson.fromJson(resp,GasDataBean.class);
                 if(gasDataBean.getCode() == 200) {
@@ -108,8 +176,6 @@ public class GasFragment extends Fragment implements View.OnClickListener {
                         gasEntityArrayList.add(gasEntity);
                     }
                     handler.post(loadRecyclerView);
-                } else if(gasDataBean.getCode() == 111){
-                    handler.post(resetRecyclerView);
                 }
             }
             @Override
@@ -135,7 +201,6 @@ public class GasFragment extends Fragment implements View.OnClickListener {
     /**
      * TODO 对recycleview进行配置
      */
-
     private void initRecyclerView() {
         //获取RecyclerView
         mCollectRecyclerView=(RecyclerView)gas.findViewById(R.id.collect_recyclerView);
@@ -158,4 +223,8 @@ public class GasFragment extends Fragment implements View.OnClickListener {
         });
     }
 
+    @Override
+    public void scroll(int yy) {
+
+    }
 }

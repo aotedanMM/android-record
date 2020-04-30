@@ -22,10 +22,10 @@
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_config"
         android:requestLegacyExternalStorage="true"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@drawable/icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:targetApi="n">
         <!-- 为解决欢迎页空白情况，添加style -->
         <activity
@@ -35,24 +35,21 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- 首页 -->
-        <activity android:name=".MainActivity" />
-        <!-- 登录 -->
-        <activity android:name=".Activity.LoginActivity" />
-        <!-- 注册 -->
-        <activity android:name=".Activity.RegisterActivity" />
-        <!-- 忘记密码 -->
-        <activity android:name=".Activity.ForgetActivity"/>
-        <!--首页2-->
+        </activity> <!-- 首页 -->
+        <activity android:name=".MainActivity" /> <!-- 登录 -->
+        <activity android:name=".Activity.LoginActivity" /> <!-- 注册 -->
+        <activity android:name=".Activity.RegisterActivity" /> <!-- 忘记密码 -->
+        <activity android:name=".Activity.ForgetActivity" /> <!-- 首页2 -->
+        <!--输入法把底部菜单顶上去解决方法-->
+        <!--android:windowSoftInputMode="adjustPan"-->
         <activity
             android:name=".IndexActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:label="@string/title_activity_index"/>
-        <!--人员信息详情页-->
-        <activity android:name=".Activity.GasDetailActivity"/>
-        <!--语音通话-->
-        <activity android:name=".Activity.VoiceChatActivity"/>
+            android:label="@string/title_activity_index"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Activity.GasDetailActivity" /> <!-- 人员信息详情页 -->
+        <activity android:name=".Activity.VoiceChatActivity" /> <!-- 语音通话 -->
+        <activity android:name=".Activity.AboutUsActivity"/><!-- 关于我们 -->
+        <activity android:name=".Activity.HistoryExcessiveActivity"/><!-- 历史超标 -->
     </application>
 
 </manifest>

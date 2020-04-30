@@ -17,13 +17,9 @@ import com.example.aotedan.bean.LoginDataBean;
 import com.example.aotedan.network.NetworkRequest;
 import com.example.aotedan.utils.SharedHelper;
 import com.google.gson.Gson;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-//import com.zhy.http.okhttp.OkHttpUtils;
 
 
 public class LoginActivity extends Activity implements View.OnClickListener {
@@ -44,18 +40,17 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-//        handleSSLHandshake();
         initView();
     }
     private void initView() {
+        // 设置标题栏（登录）
+        title_bar = findViewById(R.id.title_bar);
+        title_bar.setText("登录");
         user_account = findViewById(R.id.user_name);
         user_psd = findViewById(R.id.user_psd);
         login_btn = findViewById(R.id.login_btn);
         register = findViewById(R.id.register);
         forget = findViewById(R.id.forget);
-        // 设置标题栏（登录）
-        title_bar = findViewById(R.id.title_bar);
-        title_bar.setText("登录");
         mContext = getApplicationContext();
         sh = new SharedHelper(mContext);
         handler = new Handler();
@@ -70,7 +65,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_btn:
-                Log.i("onClick", "login");
                 login();
                 break;
             case R.id.register:
@@ -100,7 +94,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             e.printStackTrace();
         }
         String url = App.url + "/login";
-        NetworkRequest.RequestPostParams(mContext,url, json, new com.example.aotedan.network.Request() {
+        NetworkRequest.RequestPostParams(LoginActivity.this,url, json, new com.example.aotedan.network.Request() {
             @Override
             public void success(String responseData) {
                 Log.i("resp",String.valueOf(responseData));
@@ -115,18 +109,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     App.token = loginDataBean.getData().getToken();
                     // 跳转到首页
                     handler.post(activityToIndex);
-                } else {
-                    Looper.prepare();
-                    App.toast.ToastMessageShort(loginDataBean.getMsg());
-                    Looper.loop();
                 }
             }
             @Override
             public void error(String error) {
                 Log.i("error",error);
-                Looper.prepare();
-                App.toast.ToastMessageShort(String.valueOf(error));
-                Looper.loop();
             }
         });
     }
@@ -135,15 +122,13 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         startActivity(intent);
     }
     private void forgetPsd() {
-
         Intent intent = new Intent(LoginActivity.this, ForgetActivity.class);
         startActivity(intent);
     }
-    // 更新视图
+    //页面跳转
     private Runnable activityToIndex =new  Runnable(){
         @Override
         public void run() {
-            //页面跳转
             Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
             startActivity(intent);
         }

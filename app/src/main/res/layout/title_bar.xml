@@ -3,14 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="56dp"
     android:background="@color/colorPrimary">
-<TextView
-    android:id="@+id/title_bar"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="中科鑫合"
-    android:layout_centerVertical="true"
-    android:layout_centerHorizontal="true"
-    android:textColor="#fff"
-    android:textSize="22sp"
-    />
+    <RelativeLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/title_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:visibility="visible"
+            android:background="@mipmap/back"/>
+    </RelativeLayout>
+        <TextView
+            android:id="@+id/title_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="#fff"
+            android:textSize="22sp"
+            />
 </RelativeLayout>

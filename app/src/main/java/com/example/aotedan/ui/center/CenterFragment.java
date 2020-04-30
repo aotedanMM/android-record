@@ -1,4 +1,5 @@
 package com.example.aotedan.ui.center;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,15 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import com.example.aotedan.Activity.AboutUsActivity;
+import com.example.aotedan.Activity.HistoryExcessiveActivity;
 import com.example.aotedan.Activity.LoginActivity;
 import com.example.aotedan.Activity.VoiceChatActivity;
 import com.example.aotedan.Activity.WelcomeActivity;
 import com.example.aotedan.App.App;
 import com.example.aotedan.R;
 import com.example.aotedan.bean.BaseRequestDataBean;
+import com.example.aotedan.network.NetworkRequest;
 import com.example.aotedan.utils.SharedHelper;
 import com.google.gson.Gson;
 import org.jetbrains.annotations.NotNull;
@@ -60,6 +66,7 @@ public class CenterFragment extends Fragment implements View.OnClickListener{
         about_us = center.findViewById(R.id.about_us);
         setView();
     }
+    @SuppressLint("WrongConstant")
     private void setView() {
         TextView title_bar = center.findViewById(R.id.title_bar);
         title_bar.setText("个人中心");
@@ -70,6 +77,9 @@ public class CenterFragment extends Fragment implements View.OnClickListener{
         voice_chat.setOnClickListener(this);
         history_record.setOnClickListener(this);
         about_us.setOnClickListener(this);
+        ImageView title_back = center.findViewById(R.id.title_back);
+        //0 可见、4 不可见的，但还占着原来的空间、8 隐藏，不占用原来的布局空间
+        title_back.setVisibility(4);
     }
     @Override
     public void onClick(View v) {
@@ -95,50 +105,32 @@ public class CenterFragment extends Fragment implements View.OnClickListener{
     }
     // 跳转到历史超标
     private void activityToHistoryRecord() {
-//        Intent intent = new Intent(getActivity(), LoginActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(getActivity(), HistoryExcessiveActivity.class);
+        startActivity(intent);
     }
     // 跳转到关于我们
-    private  void activityToAboutUs() {
-//        Intent intent = new Intent(getActivity(), LoginActivity.class);
-//        startActivity(intent);
+    private void activityToAboutUs() {
+        Intent intent = new Intent(getActivity(), AboutUsActivity.class);
+        startActivity(intent);
     }
     // 退出登录
     private void logout() {
-        // get请求带参数
-//        Request.Builder reqBuild = new Request.Builder();
-//
-//        HttpUrl.Builder urlBuilder =HttpUrl.parse(url)
-//                .newBuilder();
-//        urlBuilder.addQueryParameter("key","13243210010");
-//        reqBuild.url(urlBuilder.build());
-//        Request request = reqBuild.build();
-
         String url = App.url + "/logout";
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder()
-                .header("Authorization",App.token)
-                .url(url)
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        NetworkRequest.RequestGet(getActivity(), url, new com.example.aotedan.network.Request() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.d("failure","onFailure");
-            }
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                String resp = response.body().string();
-                Log.i("resp",resp);
+            public void success(String resp) {
                 Gson gson = new Gson();
                 baseRequestDataBean = gson.fromJson(resp,BaseRequestDataBean.class);
                 if(baseRequestDataBean.getCode()==200){
                     sh.save("","",""); // 退出登录、清除缓存数据
+                    App.token = "";
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent);
-                } else {
-                    App.toast.ToastMessageShort(baseRequestDataBean.getMsg());
                 }
+            }
+            @Override
+            public void error(String error) {
+                Log.i("error",error);
             }
         });
     }

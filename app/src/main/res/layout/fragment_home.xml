@@ -8,35 +8,40 @@
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
+       android:background="@color/colorBackground"
        android:orientation="vertical">
     <!--标题栏-->
     <include layout="@layout/title_bar"/>
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:background="@mipmap/banner"/>
+        android:layout_height="230dp"
+        android:background="@mipmap/banner2"/>
     <!--井下人数-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginTop="5dp">-->
-        <!--                <ImageView-->
-        <!--                    android:layout_width="20dp"-->
-        <!--                    android:layout_height="20dp"-->
-        <!--                    android:layout_gravity="center_vertical"-->
-        <!--                    android:layout_marginLeft="20dp"-->
-        <!--                    android:layout_marginRight="5dp"-->
-        <!--                    android:background="@mipmap/title1"/>-->
-        <!--                <TextView-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:textSize="18sp"-->
-        <!--                    android:text="井下人数"/>-->
-        <!--            </LinearLayout>-->
+        android:orientation="vertical"
+        android:background="@drawable/bg_white"
+        android:layout_marginTop="-70dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+<!--        <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="5dp">-->
+<!--                        <ImageView-->
+<!--                            android:layout_width="20dp"-->
+<!--                            android:layout_height="20dp"-->
+<!--                            android:layout_gravity="center_vertical"-->
+<!--                            android:layout_marginLeft="20dp"-->
+<!--                            android:layout_marginRight="5dp"-->
+<!--                            android:background="@mipmap/title1"/>-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:textSize="15sp"-->
+<!--                            android:text="井下人数"/>-->
+<!--                    </LinearLayout>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -195,6 +200,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/whiteColor"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"

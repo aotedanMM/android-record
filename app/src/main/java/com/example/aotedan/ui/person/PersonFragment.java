@@ -1,16 +1,19 @@
 package com.example.aotedan.ui.person;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,12 +32,14 @@ import com.example.aotedan.Entity.StaffEntity;
 import com.example.aotedan.R;
 import com.example.aotedan.bean.GasDataBean;
 import com.example.aotedan.bean.StaffDataBean;
+import com.example.aotedan.network.NetworkRequest;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -64,13 +69,12 @@ public class PersonFragment extends Fragment implements View.OnClickListener{
                              ViewGroup container, Bundle savedInstanceState) {
         person = inflater.inflate(R.layout.fragment_person, container, false);
         initView();
+        setTitle();
         initData(null);
         return person;
     }
     private void initView(){
         handler = new Handler();
-        TextView title_bar = person.findViewById(R.id.title_bar);
-        title_bar.setText("人员监测");
         search_btn = person.findViewById(R.id.search_btn);
         staff_edit = person.findViewById(R.id.staff_edit);
         sort_btn1 = person.findViewById(R.id.sort_btn1);
@@ -86,6 +90,13 @@ public class PersonFragment extends Fragment implements View.OnClickListener{
         sort_btn4.setOnClickListener(this);
         sort_btn5.setOnClickListener(this);
         sort_btn6.setOnClickListener(this);
+    }
+    @SuppressLint("WrongConstant")
+    private void setTitle() {
+        TextView title_bar = person.findViewById(R.id.title_bar);
+        title_bar.setText("人员监测");
+        ImageView title_back = person.findViewById(R.id.title_back);
+        title_back.setVisibility(4);
     }
     @Override
     public void onClick(View v) {
@@ -115,16 +126,10 @@ public class PersonFragment extends Fragment implements View.OnClickListener{
     }
     // 根据员工姓名查找员工信息
     private void handleSearchStaffData() {
+        staffEntityArrayList.clear();
+        mCollectRecyclerAdapter.notifyDataSetChanged();
         String search_name = staff_edit.getText().toString().trim();
-        if(search_name.equals("")){
-            App.toast.ToastMessageShort("请输入要查询的员工姓名");
-            initData(null);
-            return;
-        }else {
-            staffEntityArrayList.clear();
-            mCollectRecyclerAdapter.notifyDataSetChanged();
-            initData(search_name);
-        }
+        initData(search_name);
     }
     // 跳转到详情页
     private void activityToDetail( int type) {
@@ -133,32 +138,17 @@ public class PersonFragment extends Fragment implements View.OnClickListener{
         startActivity(intent);
     }
     // 获取数据
-    private  void initData(String params) {
-        // get请求带参数
-        Request.Builder reqBuild = new Request.Builder()
-                .header("Authorization","13243210010");
-        HttpUrl.Builder urlBuilder =HttpUrl.parse("http://192.168.1.50:8080/v1/api/attendance/getRtAttendanceStaff")
-                .newBuilder();
-        urlBuilder.addQueryParameter("page","1");
-        urlBuilder.addQueryParameter("limit","20");
-        if(params != null) {
-            urlBuilder.addQueryParameter("staffName",params);
+    private  void initData(String staffName) {
+        String url = App.url +  "attendance/getRtAttendanceStaff";
+        Map<String,String> map = new ArrayMap<>();
+        map.put("limit","20");
+        map.put("page","1");
+        if(staffName != null) {
+            map.put("staffName","");
         }
-        reqBuild.url(urlBuilder.build());
-        Request request = reqBuild.build();
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        NetworkRequest.RequestGetParams(getActivity(), url, map, new com.example.aotedan.network.Request() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.d("failure","onFailure");
-                Looper.prepare();
-                App.toast.ToastMessageShort(String.valueOf(e));
-                Looper.loop();
-            }
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                String resp = response.body().string();
+            public void success(String resp) {
                 Log.i("resp",resp);
                 Gson gson = new Gson();
                 staffDataBean = gson.fromJson(resp, StaffDataBean.class);
@@ -176,11 +166,11 @@ public class PersonFragment extends Fragment implements View.OnClickListener{
                     handler.post(loadRecyclerView);
                 } else if(staffDataBean.getCode() == 111) {
                     handler.post(resetRecyclerView);
-                }else {
-                    Looper.prepare();
-                    App.toast.ToastMessageShort(staffDataBean.getMsg());
-                    Looper.loop();
                 }
+            }
+            @Override
+            public void error(String error) {
+                Log.d("error",error);
             }
         });
     }

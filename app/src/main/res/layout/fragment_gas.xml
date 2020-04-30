@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,180 +10,181 @@
         android:orientation="vertical">
         <!--标题栏-->
         <include layout="@layout/title_bar"/>
-        <!--分类-->
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/whiteColor"
-        tools:ignore="MissingConstraints">
-        <LinearLayout
+        <com.example.aotedan.view.MyScrollview
+            android:id="@+id/myScroll"
             android:layout_width="match_parent"
-            android:layout_height="90dp">
-            <LinearLayout
-                android:id="@+id/sort_btn1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:background="@mipmap/ch4" />
-
-                <TextView
-                    android:id="@+id/sort_btn1_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/gas_sort1"
-                    android:textColor="#333"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/sort_btn2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:background="@mipmap/co" />
-
-                <TextView
-                    android:id="@+id/sort_btn2_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/gas_sort2"
-                    android:textColor="#333"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/sort_btn3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:background="@mipmap/o2" />
-
-                <TextView
-                    android:id="@+id/sort_btn3_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/gas_sort3"
-                    android:textColor="#333"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
+            android:layout_height="match_parent">
+         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="90dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <!--分类-->
             <LinearLayout
-                android:id="@+id/sort_btn4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:background="@mipmap/temperature" />
-                <TextView
-                    android:id="@+id/sort_btn4_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/gas_sort4"
-                    android:textColor="#333"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/sort_btn5"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:background="@mipmap/humidity" />
-
-                <TextView
-                    android:id="@+id/sort_btn5_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/gas_sort5"
-                    android:textColor="#333"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/sort_btn6"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-        <!--搜索-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/gas_staff_edit"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                style="@style/gasEdit"
-                android:background="@drawable/input_border_small"
-                android:hint="@string/search_edit"/>
-            <Button
-                android:id="@+id/search_btn"
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                style="@style/searchBtn"
-                android:background="@drawable/btn_primary_small"
-                android:text="@string/search_btn"
-                />
-        </LinearLayout>
-        <!--列表-->
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:paddingBottom="60dp"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:background="@color/whiteColor"
+            tools:ignore="MissingConstraints">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp">
+                <LinearLayout
+                    android:id="@+id/sort_btn1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:background="@mipmap/ch4" />
+
+                    <TextView
+                        android:id="@+id/sort_btn1_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/gas_sort1"
+                        android:textColor="#333"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/sort_btn2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:background="@mipmap/co" />
+
+                    <TextView
+                        android:id="@+id/sort_btn2_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/gas_sort2"
+                        android:textColor="#333"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/sort_btn3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:background="@mipmap/o2" />
+
+                    <TextView
+                        android:id="@+id/sort_btn3_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/gas_sort3"
+                        android:textColor="#333"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp">
+                <LinearLayout
+                    android:id="@+id/sort_btn4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:background="@mipmap/temperature" />
+                    <TextView
+                        android:id="@+id/sort_btn4_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/gas_sort4"
+                        android:textColor="#333"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/sort_btn5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:background="@mipmap/humidity" />
+
+                    <TextView
+                        android:id="@+id/sort_btn5_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/gas_sort5"
+                        android:textColor="#333"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/sort_btn6"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+            <!--搜索-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/gas_staff_edit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/gasEdit"
+                    android:background="@drawable/input_border_small"
+                    android:hint="@string/search_edit"/>
+                <Button
+                    android:id="@+id/search_btn"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    style="@style/searchBtn"
+                    android:background="@drawable/btn_primary_small"
+                    android:text="@string/search_btn"
+                    />
+            </LinearLayout>
+            <!--列表-->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/collect_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
-
-    </LinearLayout>
+        </com.example.aotedan.view.MyScrollview>
+</LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

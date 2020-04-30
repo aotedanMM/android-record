@@ -23,6 +23,41 @@
         android:layout_height="wrap_content"
         style="@style/gasList"
         android:text="气体信息"/>
+    <TextView
+        android:id="@+id/gas_ch4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/gasList"
+        android:visibility="visible"
+        android:text="甲烷"/>
+    <TextView
+        android:id="@+id/gas_co"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        style="@style/gasList"
+        android:text="一氧化碳"/>
+    <TextView
+        android:id="@+id/gas_o2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        style="@style/gasList"
+        android:text="氧气"/>
+    <TextView
+        android:id="@+id/gas_temperature"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        style="@style/gasList"
+        android:text="温度"/>
+    <TextView
+        android:id="@+id/gas_humidity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        style="@style/gasList"
+        android:text="湿度"/>
 
     <TextView
         android:id="@+id/gas_create_time"

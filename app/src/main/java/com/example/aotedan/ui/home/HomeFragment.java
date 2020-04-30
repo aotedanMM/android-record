@@ -1,5 +1,6 @@
 package com.example.aotedan.ui.home;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,7 +35,6 @@ public class HomeFragment extends Fragment{
     private Handler handler;
     private DownHoleNumBean downHoleNum;
     private WarnAreaNumBean warnAreaNum;
-    private JSONObject personNumData;
     private View home;
     private TextView person_sort1_num;
     private TextView person_sort2_num;
@@ -42,7 +43,6 @@ public class HomeFragment extends Fragment{
     private TextView person_sort5_num;
     private TextView person_sort6_num;
     private String api_url;
-    private int staffNumType;
     private int totalNum;
     private int timeoutNum;
     private int seriousTimeNum;
@@ -64,7 +64,15 @@ public class HomeFragment extends Fragment{
         person_sort4_num = (TextView) home.findViewById(R.id.person_sort4_num);
         person_sort5_num = (TextView) home.findViewById(R.id.person_sort5_num);
         person_sort6_num = (TextView) home.findViewById(R.id.person_sort6_num);
+        setTitle();
         handleFetchAllStaffNum();
+    }
+    @SuppressLint("WrongConstant")
+    private void setTitle() {
+        TextView title_bar = (TextView)home.findViewById(R.id.title_bar);
+        title_bar.setText("中科鑫合");
+        ImageView title_back = home.findViewById(R.id.title_back);
+        title_back.setVisibility(4);
     }
     // 获取井下各类人数
     private void handleFetchAllStaffNum() {
@@ -77,12 +85,11 @@ public class HomeFragment extends Fragment{
     }
     // 获取井下总人数
     private void handleFetchTotalNum(){
-        Log.i("token",App.token);
         api_url = App.url + "/attendance/getRtAttendanceStaff";
         NetworkRequest.RequestGet(getActivity(), api_url, new com.example.aotedan.network.Request() {
             @Override
             public void success(String responseData) {
-                Log.i("success",responseData);
+                Log.i("总人数",responseData);
                 Gson gson = new Gson();
                 downHoleNum = gson.fromJson(responseData, DownHoleNumBean.class);
                 if(downHoleNum.getCode()==200){
@@ -96,14 +103,13 @@ public class HomeFragment extends Fragment{
             }
         });
     }
-    // 获取井下总人数
+    // 获取井下超时人数
     private void handleFetchTimeOutStaffNum(){
-        Log.i("token",App.token);
         api_url = App.url + "/attendance/getOverTimeStaff";
         NetworkRequest.RequestGet(getActivity(), api_url, new com.example.aotedan.network.Request() {
             @Override
             public void success(String responseData) {
-                Log.i("success",responseData);
+                Log.i("超时人数",responseData);
                 Gson gson = new Gson();
                 downHoleNum = gson.fromJson(responseData, DownHoleNumBean.class);
                 if(downHoleNum.getCode()==200){
@@ -119,12 +125,11 @@ public class HomeFragment extends Fragment{
     }
     // 获取井下严重超时人数
     private void handleFetchSevereTimeOutStaffNum(){
-        Log.i("token",App.token);
         api_url = App.url + "/attendance/getSeriousTimeStaff";
         NetworkRequest.RequestGet(getActivity(), api_url, new com.example.aotedan.network.Request() {
             @Override
             public void success(String responseData) {
-                Log.i("success",responseData);
+                Log.i("严重超时",responseData);
                 Gson gson = new Gson();
                 downHoleNum = gson.fromJson(responseData, DownHoleNumBean.class);
                 if(downHoleNum.getCode()==200){
@@ -140,12 +145,11 @@ public class HomeFragment extends Fragment{
     }
     // 获取井下缺勤人数
     private void handleFetchAbsenceStaffNum(){
-        Log.i("token",App.token);
         api_url = App.url + "/attendance/getUnAttendanceStaff";
         NetworkRequest.RequestGet(getActivity(), api_url, new com.example.aotedan.network.Request() {
             @Override
             public void success(String responseData) {
-                Log.i("success",responseData);
+                Log.i("缺勤人数",responseData);
                 Gson gson = new Gson();
                 downHoleNum = gson.fromJson(responseData, DownHoleNumBean.class);
                 if(downHoleNum.getCode()==200){
@@ -162,12 +166,11 @@ public class HomeFragment extends Fragment{
 
     // 获取井下重点区域人数
     private void handleFetchImportantAreaStaffNum(){
-        Log.i("token",App.token);
         api_url = App.url + "/warningArea/findStaffNumByType?type=1";
         NetworkRequest.RequestGet(getActivity(), api_url, new com.example.aotedan.network.Request() {
             @Override
             public void success(String responseData) {
-                Log.i("success",responseData);
+                Log.i("重点区域",responseData);
                 Gson gson = new Gson();
                 warnAreaNum = gson.fromJson(responseData, WarnAreaNumBean.class);
                 if(warnAreaNum.getCode()==200){
@@ -183,12 +186,11 @@ public class HomeFragment extends Fragment{
     }
     // 获取井下限制区域人数
     private void handleFetchLimitAreaStaffNum(){
-        Log.i("token",App.token);
         api_url = App.url + "/warningArea/findStaffNumByType?type=2";
         NetworkRequest.RequestGet(getActivity(), api_url, new com.example.aotedan.network.Request() {
             @Override
             public void success(String responseData) {
-                Log.i("success",responseData);
+                Log.i("限制区域",responseData);
                 Gson gson = new Gson();
                 warnAreaNum = gson.fromJson(responseData, WarnAreaNumBean.class);
                 if(warnAreaNum.getCode()==200){
